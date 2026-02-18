@@ -23,7 +23,7 @@
 | **State Management**        | zustand                        |
 | **Component Development**   | Storybook                      |
 | **Chart Library**           | TradingView Lightweight Charts |
-| **Stock API**               | Finnhub.io (REST + WebSocket)  |
+| **Coin API**                | 두나무 (REST + WebSocket)      |
 
 ---
 
