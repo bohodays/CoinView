@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 
 export const revalidate = 60 * 10; // 10분으로 캐싱
-
 export async function GET() {
   const BASE_URL = process.env.UPBIT_API_BASE_URL;
 

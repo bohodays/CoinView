@@ -1,4 +1,4 @@
-type MarketEvent = {
+export type MarketEvent = {
   warning: boolean;
   caution: {
     PRICE_FLUCTUATIONS: boolean;

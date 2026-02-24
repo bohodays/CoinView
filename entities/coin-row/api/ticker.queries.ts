@@ -1,17 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchTickerAllData } from "./ticker.api";
+import { Ticker } from "../model/type";
 
 export const tickerQueryKeys = {
   all: ["coin", "ticker", "all"],
 };
 
 export const useTickerData = () => {
-  return useQuery({
+  return useQuery<Ticker[]>({
     queryKey: tickerQueryKeys.all,
     queryFn: fetchTickerAllData,
-    refetchIntervalInBackground: false,
-    staleTime: 5 * 60 * 1000,
-    gcTime: 5 * 60 * 1000,
-    // retry: 0,
+    staleTime: 10 * 60 * 1000, // revalidate 시간과 동일하게 10분으로 설정
+    refetchInterval: 10 * 60 * 1000,
   });
 };

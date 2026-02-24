@@ -1,28 +1,62 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchMarketData } from "../api/market.api";
 import { useMarketData } from "../api/market.queries";
-import { useTickerData } from "../api/ticker.queries";
-import { useTickerStore } from "../model/ticker.store";
+import CoinRow from "@/entities/coin-row/ui/CoinRow";
+import { useTickerData } from "@/entities/coin-row/api/ticker.queries";
+import { mergeMarketAndTicker } from "@/shared/lib/utils";
+import { CoinViewModel } from "@/entities/coin-row/model/type";
+import { connetTickerSocket } from "@/entities/coin-row/websocket/ticker.websocket";
 
 const CoinList = () => {
   const {
     data: marketData,
     error: marketFetchError,
     isLoading: isMarketDataLoading,
-  } = useMarketData();
-  const { data: tickerAllData } = useTickerData();
-  const updateTicker = useTickerStore((store) => store.updateTicker);
+  } = useMarketData(); // 마켓데이터
+  const {
+    data: tickerAllData,
+    error: tickerFetchError,
+    isLoading: isTickerDataLoading,
+  } = useTickerData(); // 티커 데이터
+  const [coinViewModel, setCoinViewModel] = useState<CoinViewModel[]>([]);
+
+  const isFetching = isMarketDataLoading || isTickerDataLoading;
 
   useEffect(() => {
-    if (tickerAllData) {
-      console.log({ tickerAllData });
-      updateTicker(tickerAllData);
-    }
-  }, [tickerAllData]);
+    if (!isFetching && !coinViewModel.length) {
+      if (tickerAllData && marketData) {
+        const mergeMarketAndTickerData = mergeMarketAndTicker({
+          tickerAllData,
+          market: marketData,
+        });
+        setCoinViewModel(mergeMarketAndTickerData);
 
-  return <div>CoinList</div>;
+        connetTickerSocket(mergeMarketAndTickerData);
+      }
+    }
+  }, [isFetching]);
+
+  if (isFetching) return <div>{"Loading"}</div>;
+
+  return (
+    <div className="flex flex-col">
+      <div className="text-center grid grid-cols-[180px_1fr_120px] items-center px-4 py-2">
+        <div className="text-left">{"코인명"}</div>
+        <div className="text-right">{"현재가"}</div>
+        <div className="text-right">{"전일대비"}</div>
+      </div>
+      {coinViewModel?.map((market) => (
+        <CoinRow
+          key={market.market}
+          {...market}
+          // koreanName={market.korean_name}
+          // isWarning={market.market_event.warning}
+        />
+      ))}
+    </div>
+  );
 };
 
 export default CoinList;
