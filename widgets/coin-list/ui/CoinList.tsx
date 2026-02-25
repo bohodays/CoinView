@@ -41,20 +41,17 @@ const CoinList = () => {
   if (isFetching) return <div>{"Loading"}</div>;
 
   return (
-    <div className="flex flex-col">
-      <div className="text-center grid grid-cols-[180px_1fr_120px] items-center px-4 py-2">
+    <div className="flex flex-col h-full">
+      <div className="text-center grid grid-cols-[180px_1fr_120px] items-center px-4 py-2 border-b-3 border-border">
         <div className="text-left">{"코인명"}</div>
         <div className="text-right">{"현재가"}</div>
         <div className="text-right">{"전일대비"}</div>
       </div>
-      {coinViewModel?.map((market) => (
-        <CoinRow
-          key={market.market}
-          {...market}
-          // koreanName={market.korean_name}
-          // isWarning={market.market_event.warning}
-        />
-      ))}
+      <div className="flex-1 min-h-0 overflow-y-auto scrollbar-hide">
+        {coinViewModel?.map((market) => (
+          <CoinRow key={market.market} {...market} />
+        ))}
+      </div>
     </div>
   );
 };

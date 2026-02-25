@@ -31,7 +31,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="mx-auto w-full max-w-[430px] h-dvh border-x-2 shadow-lg">
+        <div className="mx-auto w-full max-w-[430px] h-dvh border-x-2 shadow-lg flex flex-col min-h-0 overflow-hidden">
           <Provider
             attribute="class"
             defaultTheme="system"

@@ -4,15 +4,19 @@ import Header from "@/widgets/header/ui/Header";
 
 const HomePage = () => {
   return (
-    <div className="flex flex-col h-full gap-10">
+    <div className="flex flex-col h-full min-h-0">
       {/* 1. Header */}
       <Header />
 
       {/* 2. SearchBar */}
-      <CoinSearchBar />
+      <div className="py-10">
+        <CoinSearchBar />
+      </div>
 
       {/* 3. CoinList */}
-      <CoinList />
+      <div className="flex-1 min-h-0">
+        <CoinList />
+      </div>
     </div>
   );
 };

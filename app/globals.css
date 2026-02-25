@@ -124,3 +124,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* 스크롤은 되지만 스크롤바는 숨김 */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE/Edge legacy */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
