@@ -9,6 +9,7 @@ import WarningCautionTag from "@/entities/warning-caution-tag/ui/WarningCautionT
 
 const CoinRow = memo((props: CoinViewModel) => {
   const { market, korean_name: koreanName, market_event: marketEvent } = props;
+  // primitive만 구독 (Zustand는 selector가 반환하는 값이 Object.is로 동일하면 리렌더 방지)
   const ticker = useTickerStore((store) => store.tickers[market]);
   const [flash, setFlash] = useState(false);
   const prevPriceRef = useRef<number | null>(null);
@@ -24,20 +25,21 @@ const CoinRow = memo((props: CoinViewModel) => {
   useEffect(() => {
     if (!ticker) return;
 
-    if (
-      prevPriceRef.current !== null &&
-      prevPriceRef.current !== ticker.trade_price
-    ) {
-      setFlash(true);
-      const id = setTimeout(() => setFlash(false), 150);
-      return () => clearTimeout(id);
-    }
+    const next = ticker.trade_price;
+    const prev = prevPriceRef.current;
 
-    prevPriceRef.current = ticker.trade_price;
-  }, [ticker]);
+    // 항상 업데이트
+    prevPriceRef.current = next;
+
+    if (prev !== null && prev !== next) {
+      setFlash(true);
+      const id = window.setTimeout(() => setFlash(false), 250);
+      return () => window.clearTimeout(id);
+    }
+  }, [ticker?.trade_price]);
 
   // TODO. 스켈레톤 코드로 변경
-  if (!ticker) return;
+  if (!ticker) return null;
 
   // 전일대비 색상 적용을 위한 CSS 변수 (양수 / 빨간색, 음수 / 파란색)
   const signedTextColor =
@@ -62,9 +64,9 @@ const CoinRow = memo((props: CoinViewModel) => {
           "text-right tabular-nums transition-colors duration-150 border-2 p-2 border-transparent",
           signedTextColor,
           flash &&
-            (ticker.change === "RISE"
+            (ticker.current_change === "RISE"
               ? "border-red-500"
-              : ticker.change === "FALL"
+              : ticker.current_change === "FALL"
                 ? "border-blue-500"
                 : "border-transparent"),
         )}
