@@ -7,7 +7,10 @@ import CoinRow from "@/entities/coin-row/ui/CoinRow";
 import { useTickerData } from "@/entities/coin-row/api/ticker.queries";
 import { mergeMarketAndTicker } from "@/shared/lib/utils";
 import { CoinViewModel } from "@/entities/coin-row/model/type";
-import { connetTickerSocket } from "@/entities/coin-row/websocket/ticker.websocket";
+import {
+  connetTickerSocket,
+  disconnectTickerSocket,
+} from "@/entities/coin-row/websocket/ticker.websocket";
 
 const CoinList = () => {
   const {
@@ -36,6 +39,10 @@ const CoinList = () => {
         connetTickerSocket(mergeMarketAndTickerData);
       }
     }
+
+    return () => {
+      disconnectTickerSocket();
+    };
   }, [isFetching]);
 
   if (isFetching) return <div>{"Loading"}</div>;

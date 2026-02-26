@@ -86,4 +86,6 @@ export type TickerWs = {
   market_warning: "NONE" | "CAUTION" | string; // Deprecated 필드로 참조 대상에서 제외하는 것을 권장합니다.
 
   stream_type: "REALTIME" | "SNAPSHOT";
+
+  current_change: "EVEN" | "RISE" | "FALL" | null; // 현재가격변화 (업비트에서 제공해주지 않음. 별도 계산)
 };
