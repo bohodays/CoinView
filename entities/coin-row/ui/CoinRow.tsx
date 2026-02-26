@@ -6,6 +6,7 @@ import { CoinViewModel } from "../model/type";
 import { useTickerStore } from "../model/ticker.store";
 import { cn } from "@/shared/lib/utils";
 import WarningCautionTag from "@/entities/warning-caution-tag/ui/WarningCautionTag";
+import Link from "next/link";
 
 const CoinRow = memo((props: CoinViewModel) => {
   const { market, korean_name: koreanName, market_event: marketEvent } = props;
@@ -46,41 +47,43 @@ const CoinRow = memo((props: CoinViewModel) => {
     ticker.signed_change_rate > 0 ? "text-red-500" : "text-blue-500";
 
   return (
-    <div className="grid grid-cols-[180px_1fr_120px] items-center px-4 py-2 border-border hover:bg-muted/40 transition-colors border-t-3 first:border-t-0 cursor-pointer">
-      <div className="flex flex-col">
-        <div className="flex items-center gap-1">
-          <div>{koreanName}</div>
-          <div className="flex gap-1">
-            {marketEvent.warning && <WarningCautionTag type="WARN" />}
-            {isCaution && <WarningCautionTag type="CAUT" />}
+    <Link href={`/code/${market}`}>
+      <div className="grid grid-cols-[180px_1fr_120px] items-center px-4 py-2 border-border hover:bg-muted/40 transition-colors border-t-3 first:border-t-0 cursor-pointer">
+        <div className="flex flex-col">
+          <div className="flex items-center gap-1">
+            <div>{koreanName}</div>
+            <div className="flex gap-1">
+              {marketEvent.warning && <WarningCautionTag type="WARN" />}
+              {isCaution && <WarningCautionTag type="CAUT" />}
+            </div>
+            <div></div>
           </div>
-          <div></div>
+          <div>{market}</div>
         </div>
-        <div>{market}</div>
-      </div>
 
-      <div
-        className={cn(
-          "text-right tabular-nums transition-colors duration-150 border-2 p-2 border-transparent",
-          signedTextColor,
-          flash &&
-            (ticker.current_change === "RISE"
-              ? "border-red-500"
-              : ticker.current_change === "FALL"
-                ? "border-blue-500"
-                : "border-transparent"),
-        )}
-      >
-        {ticker.trade_price.toLocaleString("ko-KR")}
-      </div>
+        <div
+          className={cn(
+            "text-right tabular-nums transition-colors duration-150 border-2 p-2 border-transparent",
+            signedTextColor,
+            flash &&
+              (ticker.current_change === "RISE"
+                ? "border-red-500"
+                : ticker.current_change === "FALL"
+                  ? "border-blue-500"
+                  : "border-transparent"),
+          )}
+        >
+          {ticker.trade_price.toLocaleString("ko-KR")}
+        </div>
 
-      <div className="flex justify-end">
-        <div className={cn("flex flex-col text-right", signedTextColor)}>
-          <div>{`${(ticker.signed_change_rate * 100).toFixed(2)}%`}</div>
-          <div>{ticker.signed_change_price.toLocaleString("ko-KR")}</div>
+        <div className="flex justify-end">
+          <div className={cn("flex flex-col text-right", signedTextColor)}>
+            <div>{`${(ticker.signed_change_rate * 100).toFixed(2)}%`}</div>
+            <div>{ticker.signed_change_price.toLocaleString("ko-KR")}</div>
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 });
 
