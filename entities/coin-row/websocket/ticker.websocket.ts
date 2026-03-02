@@ -6,8 +6,6 @@ let socket: WebSocket | null = null;
 const WS_URL = process.env.NEXT_PUBLIC_UPBIT_WEBSOCKET_BASE_URL;
 
 export const connetTickerSocket = (codes: Market[]) => {
-  console.log({ WS_URL, socket });
-
   if (socket) return; // 중복 연결 방지
 
   socket = new WebSocket(WS_URL as string);
