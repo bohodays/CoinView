@@ -61,11 +61,31 @@ const CoinChart = ({ candles }: { candles: UpbitCandle[] }) => {
       scaleMargins: { top: 0.8, bottom: 0 },
     });
 
+    const timeScale = chart.timeScale();
+    const handler = (range: { from: number; to: number } | null) => {
+      if (!range) return;
+
+      // range.from이 작아질수록 왼쪽 끝에 가까움
+      const THRESHOLD = 10;
+
+      if (range.from < THRESHOLD) {
+        // 중복 호출 방지(연속으로 매우 많이 호출됨)
+        // if (loadMoreLockRef.current) return;
+        // if (isLoadingMore) return;
+
+        // loadMoreLockRef.current = true;
+        // onLoadMore();
+        console.log("드래그 테스트");
+      }
+    };
+
+    timeScale.subscribeVisibleLogicalRangeChange(handler);
     chartRef.current = chart;
     candleSeriesRef.current = candleSeries;
     volumeSeriesRef.current = volumeSeries;
 
     return () => {
+      timeScale.unsubscribeVisibleLogicalRangeChange(handler);
       chart.remove();
       chartRef.current = null;
       candleSeriesRef.current = null;

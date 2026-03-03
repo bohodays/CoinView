@@ -3,11 +3,15 @@
 import { useCandleHistoryQuery } from "@/entities/candle/api/candle.api.query";
 import { useCoinCandles } from "@/entities/candle/api/candle.websocket.query";
 import CoinChart from "@/feature/coin-chart/ui/CoinChart";
-import React from "react";
+import DetailNavigator from "@/feature/detail-navigator/ui/DetailNavigator";
 
-const CoinDetail = () => {
+type Props = {
+  market: string;
+};
+
+const CoinDetail = ({ market }: Props) => {
   const { candles, isLoading, error, wsStatus } = useCoinCandles({
-    market: "KRW-BTC",
+    market: market,
     candleUnit: "seconds",
   });
 
@@ -21,8 +25,16 @@ const CoinDetail = () => {
   if (isLoading || !candles) return null;
 
   return (
-    <div>
-      <div>CoinChart</div>
+    <div className="flex flex-col h-full min-h-0 p-3 gap-2">
+      {/* Navigator */}
+      <DetailNavigator />
+
+      {/* 현재 금액 표시 */}
+      <div className="text-xl">
+        {candles[candles.length - 1].trade_price.toLocaleString("ko-KR")}
+      </div>
+
+      {/* 차트 */}
       <CoinChart candles={candles} />
     </div>
   );

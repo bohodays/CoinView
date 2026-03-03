@@ -20,7 +20,6 @@ export const useCandleHistoryQuery = ({
   candleUnit: CandleUnit;
   minutesUnit?: MinutesUnit;
 }) => {
-  console.log({ candleUnit });
   return useQuery<UpbitCandle[]>({
     queryKey: candleKeys.byMarketUnit(market, candleUnit, minutesUnit),
     queryFn: () => fetchCandle({ market, candleUnit, minutesUnit }),

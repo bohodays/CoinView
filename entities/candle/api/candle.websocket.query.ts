@@ -5,6 +5,7 @@ import { useMemo } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { candleKeys, useCandleHistoryQuery } from "./candle.api.query";
 import { useUpbitCandleSocket } from "./candle.websocket";
+import { upbitCandleToTimeSec } from "@/feature/coin-chart/lib/utils";
 
 export const useCoinCandles = ({
   market,
@@ -39,12 +40,40 @@ export const useCoinCandles = ({
     enabled: wsEnabled,
     sessionId,
     onCandle: (e) => {
-      console.log({ e });
       if (e.sessionId !== sessionId) return;
-      console.log(e.candle);
+
       queryClient.setQueryData<UpbitCandle[]>(
         candleKeys.byMarketUnit(market, candleUnit, minutesUnit),
-        (prev) => [...(prev ?? []), e.candle],
+        (prev) => {
+          const list = prev ?? [];
+          const incoming = e.candle;
+          const t = upbitCandleToTimeSec(incoming);
+
+          if (list.length === 0) return [incoming];
+
+          // 1) 마지막과 동일 time이면 마지막 교체
+          const last = list[list.length - 1];
+          const lastT = upbitCandleToTimeSec(last);
+          if (t === lastT) {
+            const next = [...list];
+            next[next.length - 1] = incoming;
+            return next;
+          }
+
+          // 2) 더 최신이면 append
+          if (t > lastT) return [...list, incoming];
+
+          // 3) t < lastT: 늦게 온 과거 데이터
+          // 같은 time이 이미 있으면 그 자리 교체, 없으면 무시(또는 삽입 정책)
+          const idx = list.findIndex((c) => upbitCandleToTimeSec(c) === t);
+          if (idx !== -1) {
+            const next = [...list];
+            next[idx] = incoming;
+            return next;
+          }
+
+          return list;
+        },
       );
     },
   });
