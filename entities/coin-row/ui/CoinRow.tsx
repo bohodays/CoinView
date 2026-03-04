@@ -14,6 +14,7 @@ const CoinRow = memo((props: CoinViewModel) => {
   const ticker = useTickerStore((store) => store.tickers[market]);
   const [flash, setFlash] = useState(false);
   const prevPriceRef = useRef<number | null>(null);
+  const splitedMarketName = market.split("-");
 
   // 경보 적용 여부
   const isCaution =
@@ -58,7 +59,7 @@ const CoinRow = memo((props: CoinViewModel) => {
             </div>
             <div></div>
           </div>
-          <div>{market}</div>
+          <div>{`${splitedMarketName[1]}/${splitedMarketName[0]}`}</div>
         </div>
 
         <div

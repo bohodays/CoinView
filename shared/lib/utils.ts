@@ -70,3 +70,15 @@ export function minutesUnitTransWebSocketType(
 
   return typeResult;
 }
+
+/**
+ * Market의 풀네임을 만드는 유틸 함수
+ * ex) KRW-BTC -> 비트코인(BTC/KRW)
+ * @param markets
+ */
+export function makeFullMarketName(market: string, markets: Market[]) {
+  const splitedMarket = market.split("-");
+  const marketName = `${splitedMarket[1]}/${splitedMarket[0]}`;
+  const fullMarketName = `${markets.filter((item) => item.market === market)[0].korean_name} (${marketName})`;
+  return fullMarketName;
+}
