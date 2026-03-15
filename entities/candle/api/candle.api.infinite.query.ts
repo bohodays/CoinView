@@ -69,7 +69,7 @@ export const useCandleHistoryInfiniteQuery = ({
       return oldest.candle_date_time_utc;
     },
 
-    staleTime: 5_000,
-    gcTime: 5 * 60_000,
+    staleTime: 1,
+    gcTime: 1,
   });
 };
