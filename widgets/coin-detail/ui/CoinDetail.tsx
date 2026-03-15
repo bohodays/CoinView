@@ -13,30 +13,26 @@ type Props = {
 };
 
 const CoinDetail = ({ market }: Props) => {
-  const {
-    candles,
-    isLoading: isCoinCandleLoading,
-    error: coinCandleError,
-    wsStatus,
-  } = useCoinCandles({
-    market: market,
-    candleUnit: "seconds",
-  });
+  const { candles, loadMore, isLoadingMore, isLoading, error } = useCoinCandles(
+    {
+      market: market,
+      candleUnit: "seconds",
+    },
+  );
   const {
     data: marketData,
     error: marketFetchError,
     isLoading: isMarketDataLoading,
   } = useMarketData(); // 마켓데이터
+  console.log({ candles });
 
-  console.log({ candles, wsStatus });
   // const { data, error, isLoading } = useCandleHistoryQuery({
   //   market: "KRW-BTC",
   //   candleUnit: "seconds",
   // });
 
   // TODO. 스켈레톤 코드로 변경
-  if (isMarketDataLoading || isCoinCandleLoading || !marketData || !candles)
-    return null;
+  if (isMarketDataLoading || isLoading || !marketData || !candles) return null;
 
   const fullMarketName = makeFullMarketName(market, marketData);
 
@@ -54,7 +50,11 @@ const CoinDetail = ({ market }: Props) => {
       <CandleUnitButtonsWrapper />
 
       {/* 차트 */}
-      <CoinChart candles={candles} />
+      <CoinChart
+        candles={candles}
+        isLoadingMore={isLoadingMore}
+        onLoadMore={loadMore}
+      />
     </div>
   );
 };

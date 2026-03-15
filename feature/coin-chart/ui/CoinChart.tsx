@@ -1,9 +1,7 @@
-import { CandleUnit, UpbitCandle } from "@/entities/candle/model/type";
+import { UpbitCandle } from "@/entities/candle/model/type";
 import {
-  CandlestickData,
   CandlestickSeries,
   createChart,
-  HistogramData,
   HistogramSeries,
   IChartApi,
   ISeriesApi,
@@ -11,27 +9,44 @@ import {
 import React, { useEffect, useMemo, useRef } from "react";
 import { upbitCandlesToSeriesData } from "../lib/utils";
 
-const CoinChart = ({ candles }: { candles: UpbitCandle[] }) => {
+const CoinChart = ({
+  candles,
+  isLoadingMore,
+  onLoadMore,
+}: {
+  candles: UpbitCandle[];
+  isLoadingMore: boolean;
+  onLoadMore: () => Promise<void>;
+}) => {
   const { candleData, volumeData, firstTimeSec, lastTimeSec } = useMemo(() => {
     return upbitCandlesToSeriesData(candles ?? []);
   }, [candles]);
+
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const chartRef = useRef<IChartApi | null>(null);
   const candleSeriesRef = useRef<ISeriesApi<"Candlestick"> | null>(null);
   const volumeSeriesRef = useRef<ISeriesApi<"Histogram"> | null>(null);
 
-  // 차트에 마지막으로 반영한 time 추적(초 단위)
+  const firstAppliedTimeRef = useRef<number | null>(null);
   const lastAppliedTimeRef = useRef<number | null>(null);
-  // 데이터 최초 반영 여부
   const didInitSetDataRef = useRef(false);
 
-  // 1) 차트 생성/파괴
+  const loadMoreLockRef = useRef(false);
+  const enteredThresholdRef = useRef(false);
+  const isLoadingMoreRef = useRef(isLoadingMore);
+  const onLoadMoreRef = useRef(onLoadMore);
+
+  useEffect(() => {
+    isLoadingMoreRef.current = isLoadingMore;
+    onLoadMoreRef.current = onLoadMore;
+  }, [isLoadingMore, onLoadMore]);
+
   useEffect(() => {
     if (!containerRef.current) return;
 
     const chart = createChart(containerRef.current, {
-      autoSize: true, // 컨테이너 크기 따라감(단, 컨테이너에 height 필요)
+      autoSize: true,
       rightPriceScale: { borderVisible: false },
       timeScale: {
         borderVisible: false,
@@ -42,7 +57,7 @@ const CoinChart = ({ candles }: { candles: UpbitCandle[] }) => {
       grid: { vertLines: { visible: false }, horzLines: { visible: false } },
       crosshair: { mode: 1 },
     });
-    // addCandlestickSeries
+
     const candleSeries = chart.addSeries(CandlestickSeries, {
       upColor: "#ef4444",
       downColor: "#3b82f6",
@@ -53,10 +68,9 @@ const CoinChart = ({ candles }: { candles: UpbitCandle[] }) => {
 
     const volumeSeries = chart.addSeries(HistogramSeries, {
       priceFormat: { type: "volume" },
-      priceScaleId: "", // 별도 스케일
+      priceScaleId: "",
     });
 
-    // 볼륨을 아래쪽에 배치
     chart.priceScale("").applyOptions({
       scaleMargins: { top: 0.8, bottom: 0 },
     });
@@ -65,18 +79,23 @@ const CoinChart = ({ candles }: { candles: UpbitCandle[] }) => {
     const handler = (range: { from: number; to: number } | null) => {
       if (!range) return;
 
-      // range.from이 작아질수록 왼쪽 끝에 가까움
       const THRESHOLD = 10;
+      const isNearLeft = range.from < THRESHOLD;
 
-      if (range.from < THRESHOLD) {
-        // 중복 호출 방지(연속으로 매우 많이 호출됨)
-        // if (loadMoreLockRef.current) return;
-        // if (isLoadingMore) return;
-
-        // loadMoreLockRef.current = true;
-        // onLoadMore();
-        console.log("드래그 테스트");
+      if (!isNearLeft) {
+        enteredThresholdRef.current = false;
+        return;
       }
+
+      if (enteredThresholdRef.current) return;
+      enteredThresholdRef.current = true;
+
+      if (loadMoreLockRef.current || isLoadingMoreRef.current) return;
+
+      loadMoreLockRef.current = true;
+      Promise.resolve(onLoadMoreRef.current()).finally(() => {
+        loadMoreLockRef.current = false;
+      });
     };
 
     timeScale.subscribeVisibleLogicalRangeChange(handler);
@@ -92,55 +111,63 @@ const CoinChart = ({ candles }: { candles: UpbitCandle[] }) => {
       volumeSeriesRef.current = null;
 
       didInitSetDataRef.current = false;
+      firstAppliedTimeRef.current = null;
       lastAppliedTimeRef.current = null;
     };
   }, []);
 
-  /**
-   * 2) candles 변경 반영
-   * - 최초: setData 전체
-   * - 이후: 대부분 update(last)
-   */
   useEffect(() => {
     const candleSeries = candleSeriesRef.current;
     const volumeSeries = volumeSeriesRef.current;
     const chart = chartRef.current;
 
     if (!candleSeries || !volumeSeries || !chart) return;
-    if (!candleData.length || !volumeData.length || lastTimeSec === null)
+    if (!candleData.length || !volumeData.length || lastTimeSec === null) {
       return;
+    }
 
+    const prevFirst = firstAppliedTimeRef.current;
     const prevLast = lastAppliedTimeRef.current;
 
-    // 최초 1회 전체 세팅
     if (!didInitSetDataRef.current || prevLast === null) {
       candleSeries.setData(candleData);
       volumeSeries.setData(volumeData);
 
       didInitSetDataRef.current = true;
+      firstAppliedTimeRef.current = firstTimeSec;
       lastAppliedTimeRef.current = lastTimeSec;
 
       chart.timeScale().fitContent();
       return;
     }
 
-    //  리셋/마켓전환 등: 마지막 time이 과거로 점프하면 전체 재세팅
+    // loadMore response: older candles are prepended.
+    if (firstTimeSec !== null && prevFirst !== null && firstTimeSec < prevFirst) {
+      candleSeries.setData(candleData);
+      volumeSeries.setData(volumeData);
+
+      firstAppliedTimeRef.current = firstTimeSec;
+      lastAppliedTimeRef.current = lastTimeSec;
+      return;
+    }
+
     if (lastTimeSec < prevLast) {
       candleSeries.setData(candleData);
       volumeSeries.setData(volumeData);
 
+      firstAppliedTimeRef.current = firstTimeSec;
       lastAppliedTimeRef.current = lastTimeSec;
       chart.timeScale().fitContent();
       return;
     }
 
-    // 그 외 마지막 봉만 업데이트
     const lastCandle = candleData[candleData.length - 1];
     const lastVolume = volumeData[volumeData.length - 1];
 
     candleSeries.update(lastCandle);
     volumeSeries.update(lastVolume);
 
+    firstAppliedTimeRef.current = firstTimeSec;
     lastAppliedTimeRef.current = lastTimeSec;
   }, [candleData, volumeData, firstTimeSec, lastTimeSec]);
 

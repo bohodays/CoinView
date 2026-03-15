@@ -4,15 +4,24 @@ export const fetchCandle = async ({
   market,
   candleUnit,
   minutesUnit,
+  to,
 }: {
   market: string;
   candleUnit: CandleUnit;
   minutesUnit?: MinutesUnit;
+  to?: string;
 }) => {
+  let response;
   try {
-    const response = await fetch(
-      `/api/upbit/candles?market=${market}&candleUnit=${candleUnit}`,
-    );
+    if (to) {
+      response = await fetch(
+        `/api/upbit/candles?market=${market}&candleUnit=${candleUnit}&to=${to}`,
+      );
+    } else {
+      response = await fetch(
+        `/api/upbit/candles?market=${market}&candleUnit=${candleUnit}`,
+      );
+    }
 
     if (!response.ok) {
       const errorBody = await response.json().catch(() => null);

@@ -102,7 +102,6 @@ export const useUpbitCandleSocket = ({
       try {
         const data = await (event.data as Blob).text();
         const res: UpbitCandle = JSON.parse(data);
-        console.log({ res });
         // const candle = mapUpbitWsCandleToCandle(raw);
         onCandleRef.current({
           sessionId: sessionRef.current,
