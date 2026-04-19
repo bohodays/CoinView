@@ -6,7 +6,16 @@ export type CandleUnit =
   | "months"
   | "years";
 
-export type MinutesUnit = "1" | "3" | "5" | "10" | "15" | "30" | "60" | "240";
+export type MinutesUnit =
+  | null
+  | "1"
+  | "3"
+  | "5"
+  | "10"
+  | "15"
+  | "30"
+  | "60"
+  | "240";
 
 export type UpbitCandle = {
   market: string;

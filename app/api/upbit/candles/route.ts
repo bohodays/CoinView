@@ -16,24 +16,27 @@ export async function GET(req: Request) {
   }
 
   const BASE_URL = process.env.UPBIT_API_BASE_URL;
+  let TARGET_URL = "";
 
   let res;
   try {
     if (to) {
-      res = await fetch(
-        `${BASE_URL}/v1/candles/${candleUnit}?market=${market}&to=${to}&count=200`,
-        {
-          headers: { accept: "application/json" },
-        },
-      );
+      if (minutesUnit) {
+        TARGET_URL = `${BASE_URL}/v1/candles/${candleUnit}/${minutesUnit}?market=${market}&to=${to}&count=200`;
+      } else {
+        TARGET_URL = `${BASE_URL}/v1/candles/${candleUnit}?market=${market}&to=${to}&count=200`;
+      }
     } else {
-      res = await fetch(
-        `${BASE_URL}/v1/candles/${candleUnit}?market=${market}&count=200`,
-        {
-          headers: { accept: "application/json" },
-        },
-      );
+      if (minutesUnit) {
+        TARGET_URL = `${BASE_URL}/v1/candles/${candleUnit}/${minutesUnit}?market=${market}&count=200`;
+      } else {
+        TARGET_URL = `${BASE_URL}/v1/candles/${candleUnit}?market=${market}&count=200`;
+      }
     }
+
+    res = await fetch(TARGET_URL, {
+      headers: { accept: "application/json" },
+    });
 
     if (!res.ok) {
       return NextResponse.json(

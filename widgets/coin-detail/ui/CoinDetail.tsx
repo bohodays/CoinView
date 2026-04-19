@@ -2,7 +2,7 @@
 
 import { useCandleHistoryQuery } from "@/entities/candle/api/candle.api.query";
 import { useCoinCandles } from "@/entities/candle/api/candle.websocket.query";
-import { CandleUnit } from "@/entities/candle/model/type";
+import { CandleUnit, MinutesUnit } from "@/entities/candle/model/type";
 import CandleUnitButtonsWrapper from "@/feature/candle-type-button/ui/CandleUnitButtonsWrapper";
 import CoinChart from "@/feature/coin-chart/ui/CoinChart";
 import DetailNavigator from "@/feature/detail-navigator/ui/DetailNavigator";
@@ -16,10 +16,12 @@ type Props = {
 
 const CoinDetail = ({ market }: Props) => {
   const [candleUnit, setCandleUnit] = useState<CandleUnit>("seconds");
+  const [minutesUnit, setMinutesUnit] = useState<MinutesUnit>(null);
   const { candles, loadMore, isLoadingMore, isLoading, error } = useCoinCandles(
     {
       market: market,
       candleUnit,
+      minutesUnit,
     },
   );
   const {
@@ -34,7 +36,13 @@ const CoinDetail = ({ market }: Props) => {
   const fullMarketName = makeFullMarketName(market, marketData);
 
   const onChangeCandleUnit = (candleUnit: CandleUnit) => {
+    if (candleUnit !== "minutes") setMinutesUnit(null);
+
     setCandleUnit(candleUnit);
+  };
+
+  const onChangeMinutesUnit = (minuteUnit: MinutesUnit) => {
+    setMinutesUnit(minuteUnit);
   };
 
   return (
@@ -51,6 +59,7 @@ const CoinDetail = ({ market }: Props) => {
       <CandleUnitButtonsWrapper
         candleUnit={candleUnit}
         onChangeCandleUnit={onChangeCandleUnit}
+        onChangeMinutesUnit={onChangeMinutesUnit}
       />
 
       {/* 차트 */}
