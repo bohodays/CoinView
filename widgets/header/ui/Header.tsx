@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div className="py-3 px-4 flex justify-between">
       <ThemeToggle />
-      <UserInfoButton />
+      {/* <UserInfoButton /> */}
     </div>
   );
 };
