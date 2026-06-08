@@ -122,7 +122,7 @@ export const useUpbitCandleSocket = ({
     };
 
     ws.onclose = () => {
-      console.log("WS closed !");
+      console.log("Candle WS closed !");
       setStatus("closed");
       wsRef.current = null;
     };

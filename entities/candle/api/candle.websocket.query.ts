@@ -1,12 +1,16 @@
-import { minutesUnitTransWebSocketType } from "@/shared/lib/utils";
-import { InfiniteData, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  isCandleWebSocketSupported,
+  minutesUnitTransWebSocketType,
+} from "@/shared/lib/utils";
+import { InfiniteData, useQueryClient } from "@tanstack/react-query";
 import { CandleUnit, MinutesUnit, UpbitCandle } from "../model/type";
-import { useMemo } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { candleKeys, useCandleHistoryQuery } from "./candle.api.query";
+import { useEffect, useMemo } from "react";
+import { candleKeys } from "./candle.api.query";
 import { useUpbitCandleSocket } from "./candle.websocket";
 import { upbitCandleToTimeSec } from "@/feature/coin-chart/lib/utils";
 import { useCandleHistoryInfiniteQuery } from "./candle.api.infinite.query";
+import { useTickerStore } from "@/entities/coin-row/model/ticker.store";
+import { connectTickerSocketByCodes } from "@/entities/coin-row/websocket/ticker.websocket";
 
 function mergePagesToSortedUnique(pages: UpbitCandle[][]): UpbitCandle[] {
   // timeSec 기준 중복 제거 + 오름차순 정렬
@@ -35,8 +39,13 @@ export const useCoinCandles = ({
     () => minutesUnitTransWebSocketType(candleUnit, minutesUnit),
     [candleUnit, minutesUnit],
   );
+  const supportsCandleWs = useMemo(
+    () => isCandleWebSocketSupported(candleUnit, minutesUnit),
+    [candleUnit, minutesUnit],
+  );
 
-  const sessionId = useMemo(() => uuidv4(), [candleUnit, minutesUnit]);
+  const sessionId = `${market}:${candleUnit}:${minutesUnit ?? ""}`;
+  const ticker = useTickerStore((store) => store.tickers[market]);
 
   const historyQuery = useCandleHistoryInfiniteQuery({
     market,
@@ -45,7 +54,13 @@ export const useCoinCandles = ({
   });
 
   // REST 성공 후에만 WS 연결(순서 보장)
-  const wsEnabled = historyQuery.isSuccess && !!market;
+  const wsEnabled = historyQuery.isSuccess && !!market && supportsCandleWs;
+
+  useEffect(() => {
+    if (!historyQuery.isSuccess || !market || supportsCandleWs) return;
+
+    connectTickerSocketByCodes([market]);
+  }, [historyQuery.isSuccess, market, supportsCandleWs]);
 
   const { status: wsStatus } = useUpbitCandleSocket({
     market,
@@ -110,6 +125,27 @@ export const useCoinCandles = ({
     const pages = historyQuery.data?.pages ?? [];
     return mergePagesToSortedUnique(pages);
   }, [historyQuery.data]);
+  const liveCandles = useMemo(() => {
+    if (supportsCandleWs || !ticker || candles.length === 0) return candles;
+
+    const latestCandle = candles[candles.length - 1];
+    const currentPrice = ticker.trade_price;
+
+    return [
+      ...candles.slice(0, -1),
+      {
+        ...latestCandle,
+        high_price: Math.max(latestCandle.high_price, currentPrice),
+        low_price: Math.min(latestCandle.low_price, currentPrice),
+        trade_price: currentPrice,
+        timestamp: ticker.timestamp,
+      },
+    ];
+  }, [candles, supportsCandleWs, ticker]);
+  const latestCandlePrice = liveCandles[liveCandles.length - 1]?.trade_price;
+  const currentPrice = supportsCandleWs
+    ? latestCandlePrice
+    : (ticker?.trade_price ?? latestCandlePrice);
 
   // 과거 로딩 트리거 (CoinChart에서 호출)
   const loadMore = async (): Promise<void> => {
@@ -120,7 +156,8 @@ export const useCoinCandles = ({
   };
 
   return {
-    candles,
+    candles: liveCandles,
+    currentPrice,
 
     // history 상태
     isLoading: historyQuery.isLoading,

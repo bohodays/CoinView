@@ -3,27 +3,29 @@ import { v4 as uuidv4 } from "uuid";
 import { useTickerStore } from "../model/ticker.store";
 
 let socket: WebSocket | null = null;
+let subscribedCodes: string[] = [];
 const WS_URL = process.env.NEXT_PUBLIC_UPBIT_WEBSOCKET_BASE_URL;
 
 export const connetTickerSocket = (codes: Market[]) => {
-  if (socket) return; // 중복 연결 방지
+  connectTickerSocketByCodes(codes.map((code) => code.market));
+};
+
+export const connectTickerSocketByCodes = (codes: string[]) => {
+  subscribedCodes = Array.from(new Set([...subscribedCodes, ...codes]));
+
+  if (socket) {
+    if (socket.readyState === WebSocket.OPEN) {
+      socket.send(JSON.stringify(createSubscribePayload(subscribedCodes)));
+    }
+    return; // 중복 연결 방지
+  }
 
   socket = new WebSocket(WS_URL as string);
 
   socket.onopen = () => {
     console.log("Upbit WS connected !");
 
-    const ticket = uuidv4();
-    // 임시 데이터
-    const payload = [
-      { ticket },
-      { type: "ticker", codes: [...codes.map((code) => code.market)] },
-      {
-        format: "DEFAULT",
-      },
-    ];
-
-    socket?.send(JSON.stringify(payload));
+    socket?.send(JSON.stringify(createSubscribePayload(subscribedCodes)));
   };
 
   socket.onmessage = async (event) => {
@@ -35,7 +37,7 @@ export const connetTickerSocket = (codes: Market[]) => {
   };
 
   socket.onclose = () => {
-    console.log("WS closed !");
+    console.log("Ticker WS closed !");
     socket = null;
   };
 
@@ -45,7 +47,16 @@ export const connetTickerSocket = (codes: Market[]) => {
   };
 };
 
+const createSubscribePayload = (codes: string[]) => [
+  { ticket: uuidv4() },
+  { type: "ticker", codes },
+  {
+    format: "DEFAULT",
+  },
+];
+
 export const disconnectTickerSocket = () => {
   socket?.close();
   socket = null;
+  subscribedCodes = [];
 };

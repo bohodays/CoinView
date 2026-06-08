@@ -1,6 +1,5 @@
 "use client";
 
-import { useMarketData } from "@/widgets/coin-list/api/market.queries";
 import React, { memo, useEffect, useRef, useState } from "react";
 import { CoinViewModel } from "../model/type";
 import { useTickerStore } from "../model/ticker.store";
@@ -34,14 +33,24 @@ const CoinRow = memo((props: CoinViewModel) => {
     prevPriceRef.current = next;
 
     if (prev !== null && prev !== next) {
-      setFlash(true);
-      const id = window.setTimeout(() => setFlash(false), 250);
-      return () => window.clearTimeout(id);
-    }
-  }, [ticker?.trade_price]);
+      const startId = window.setTimeout(() => setFlash(true), 0);
+      const endId = window.setTimeout(() => setFlash(false), 250);
 
-  // TODO. 스켈레톤 코드로 변경
-  if (!ticker) return null;
+      return () => {
+        window.clearTimeout(startId);
+        window.clearTimeout(endId);
+      };
+    }
+  }, [ticker]);
+
+  if (!ticker) {
+    return (
+      <CoinRowSkeleton
+        koreanName={koreanName}
+        marketName={`${splitedMarketName[1]}/${splitedMarketName[0]}`}
+      />
+    );
+  }
 
   // 전일대비 색상 적용을 위한 CSS 변수 (양수 / 빨간색, 음수 / 파란색)
   const signedTextColor =
@@ -87,5 +96,37 @@ const CoinRow = memo((props: CoinViewModel) => {
     </Link>
   );
 });
+
+CoinRow.displayName = "CoinRow";
+
+const CoinRowSkeleton = ({
+  koreanName,
+  marketName,
+}: {
+  koreanName: string;
+  marketName: string;
+}) => {
+  return (
+    <div
+      className="grid grid-cols-[180px_1fr_120px] items-center border-t-3 border-border px-4 py-2 first:border-t-0"
+      aria-label={`${koreanName} 시세 로딩 중`}
+    >
+      <div className="flex flex-col gap-2">
+        <div className="flex items-center gap-1">
+          <div>{koreanName}</div>
+          <div className="h-4 w-10 animate-pulse rounded-md bg-muted" />
+        </div>
+        <div>{marketName}</div>
+      </div>
+
+      <div className="ml-auto h-8 w-28 animate-pulse rounded-md bg-muted" />
+
+      <div className="flex flex-col items-end gap-2">
+        <div className="h-4 w-16 animate-pulse rounded-md bg-muted" />
+        <div className="h-3 w-20 animate-pulse rounded-md bg-muted" />
+      </div>
+    </div>
+  );
+};
 
 export default CoinRow;
