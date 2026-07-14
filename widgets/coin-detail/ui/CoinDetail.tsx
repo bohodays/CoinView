@@ -4,6 +4,7 @@ import { useCoinCandles } from "@/entities/candle/api/candle.websocket.query";
 import { CandleUnit, MinutesUnit } from "@/entities/candle/model/type";
 import CandleUnitButtonsWrapper from "@/feature/candle-type-button/ui/CandleUnitButtonsWrapper";
 import CoinChart from "@/feature/coin-chart/ui/CoinChart";
+import CoinCurrentPriceInfo from "@/feature/coin-current-price-info/ui/CoinCurrentPriceInfo";
 import DetailNavigator from "@/feature/detail-navigator/ui/DetailNavigator";
 import { makeFullMarketName } from "@/shared/lib/utils";
 import { useMarketData } from "@/widgets/coin-list/api/market.queries";
@@ -49,8 +50,7 @@ const CoinDetail = ({ market }: Props) => {
       <DetailNavigator marketName={fullMarketName} />
 
       {/* 현재 금액 표시 */}
-      {/* <CoinCurrentPriceInfo market={market} /> */}
-      <div className="text-xl">{currentPrice?.toLocaleString("ko-KR")}</div>
+      <CoinCurrentPriceInfo price={currentPrice} />
 
       {/* 캔들 타입 선택 버튼 */}
       <CandleUnitButtonsWrapper
