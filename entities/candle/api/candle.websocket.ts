@@ -102,7 +102,6 @@ export const useUpbitCandleSocket = ({
       try {
         const data = await (event.data as Blob).text();
         const res: UpbitCandle = JSON.parse(data);
-        // const candle = mapUpbitWsCandleToCandle(raw);
         onCandleRef.current({
           sessionId: sessionRef.current,
           market,
@@ -122,7 +121,6 @@ export const useUpbitCandleSocket = ({
     };
 
     ws.onclose = () => {
-      console.log("Candle WS closed !");
       setStatus("closed");
       wsRef.current = null;
     };
