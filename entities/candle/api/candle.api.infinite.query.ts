@@ -1,31 +1,9 @@
-// entities/candle/api/candle.api.query.ts
 import { InfiniteData, useInfiniteQuery } from "@tanstack/react-query";
 import { fetchCandle } from "./candle.api";
+import { candleKeys } from "./candle.keys";
 import { CandleUnit, MinutesUnit, UpbitCandle } from "../model/type";
 
-export const candleKeys = {
-  all: ["candles"] as const,
-  byMarketUnit: (
-    market: string,
-    candleUnit: CandleUnit,
-    minutesUnit?: MinutesUnit,
-  ) => [...candleKeys.all, market, candleUnit, minutesUnit] as const,
-};
-
 type PageParam = string | undefined; // Upbit "to" ISO string
-
-const COUNT = 200;
-
-/**
- * oldest(가장 과거)보다 1초 이전으로 "to" 생성
- * - 기준: candle_date_time_utc
- * - Upbit: to 시각 "이전" 캔들 조회
- */
-function toPrevSecondFromUtc(oldestUtc: string) {
-  const ms = Date.parse(oldestUtc);
-  if (Number.isNaN(ms)) return undefined;
-  return ms;
-}
 
 export const useCandleHistoryInfiniteQuery = ({
   market,

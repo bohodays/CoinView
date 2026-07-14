@@ -23,8 +23,6 @@ export const connectTickerSocketByCodes = (codes: string[]) => {
   socket = new WebSocket(WS_URL as string);
 
   socket.onopen = () => {
-    console.log("Upbit WS connected !");
-
     socket?.send(JSON.stringify(createSubscribePayload(subscribedCodes)));
   };
 
@@ -37,7 +35,6 @@ export const connectTickerSocketByCodes = (codes: string[]) => {
   };
 
   socket.onclose = () => {
-    console.log("Ticker WS closed !");
     socket = null;
   };
 
