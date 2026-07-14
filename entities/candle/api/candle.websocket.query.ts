@@ -5,7 +5,7 @@ import {
 import { InfiniteData, useQueryClient } from "@tanstack/react-query";
 import { CandleUnit, MinutesUnit, UpbitCandle } from "../model/type";
 import { useEffect, useMemo } from "react";
-import { candleKeys } from "./candle.api.query";
+import { candleKeys } from "./candle.keys";
 import { useUpbitCandleSocket } from "./candle.websocket";
 import { upbitCandleToTimeSec } from "@/feature/coin-chart/lib/utils";
 import { useCandleHistoryInfiniteQuery } from "./candle.api.infinite.query";
