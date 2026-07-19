@@ -1,4 +1,4 @@
-import { Market } from "@/entities/market/model/type";
+import type { Market } from "@/entities/market";
 import { v4 as uuidv4 } from "uuid";
 import { useTickerStore } from "../model/ticker.store";
 

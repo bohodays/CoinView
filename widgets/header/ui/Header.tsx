@@ -1,4 +1,4 @@
-import ThemeToggle from "@/features/theme-toggle/ui/ThemeToggle";
+import { ThemeToggle } from "@/features/theme-toggle";
 
 const Header = () => {
   return (

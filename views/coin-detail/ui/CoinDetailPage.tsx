@@ -1,4 +1,4 @@
-import CoinDetail from "@/widgets/coin-detail/ui/CoinDetail";
+import { CoinDetail } from "@/widgets/coin-detail";
 
 type Props = {
   market: string;

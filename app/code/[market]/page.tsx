@@ -1,4 +1,4 @@
-import CoinDetailPage from "@/views/coin-detail/ui/CoinDetailPage";
+import { CoinDetailPage } from "@/views/coin-detail";
 import React from "react";
 
 type Props = {

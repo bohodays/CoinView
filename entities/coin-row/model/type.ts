@@ -1,4 +1,4 @@
-import { MarketEvent } from "@/entities/market/model/type";
+import type { MarketEvent } from "@/entities/market";
 
 export type Ticker = {
   market: string;

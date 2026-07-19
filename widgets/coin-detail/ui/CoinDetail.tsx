@@ -1,13 +1,11 @@
 "use client";
 
-import { useCoinCandles } from "@/entities/candle/api/candle.websocket.query";
-import { CandleUnit, MinutesUnit } from "@/entities/candle/model/type";
-import CandleUnitButtonsWrapper from "@/features/candle-type-button/ui/CandleUnitButtonsWrapper";
-import CoinChart from "@/features/coin-chart/ui/CoinChart";
-import CoinCurrentPriceInfo from "@/features/coin-current-price-info/ui/CoinCurrentPriceInfo";
-import DetailNavigator from "@/features/detail-navigator/ui/DetailNavigator";
-import { makeFullMarketName } from "@/entities/market/lib/utils";
-import { useMarketData } from "@/entities/market/api/market.queries";
+import { useCoinCandles, CandleUnit, MinutesUnit } from "@/entities/candle";
+import { CandleUnitButtonsWrapper } from "@/features/candle-type-button";
+import { CoinChart } from "@/features/coin-chart";
+import { CoinCurrentPriceInfo } from "@/features/coin-current-price-info";
+import { DetailNavigator } from "@/features/detail-navigator";
+import { makeFullMarketName, useMarketData } from "@/entities/market";
 import { useState } from "react";
 
 type Props = {

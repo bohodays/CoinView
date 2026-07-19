@@ -1,4 +1,4 @@
-import { UpbitCandle } from "@/entities/candle/model/type";
+import type { UpbitCandle } from "@/entities/candle";
 import {
   CandlestickSeries,
   createChart,

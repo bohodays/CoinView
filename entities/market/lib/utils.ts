@@ -1,4 +1,4 @@
-import { Ticker } from "@/entities/coin-row/model/type";
+import type { Ticker } from "@/entities/coin-row";
 import { Market } from "../model/type";
 
 export function mergeMarketAndTicker({

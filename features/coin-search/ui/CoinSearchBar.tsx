@@ -1,7 +1,7 @@
 "use client";
 
-import { cn } from "@/shared/lib/utils";
-import { useMarketData } from "@/entities/market/api/market.queries";
+import { cn } from "@/shared/lib";
+import { useMarketData } from "@/entities/market";
 import { Search } from "lucide-react";
 import Link from "next/link";
 import React, { useMemo, useState } from "react";

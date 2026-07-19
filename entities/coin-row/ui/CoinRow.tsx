@@ -3,8 +3,8 @@
 import React, { memo, useEffect, useRef, useState } from "react";
 import { CoinViewModel } from "../model/type";
 import { useTickerStore } from "../model/ticker.store";
-import { cn } from "@/shared/lib/utils";
-import WarningCautionTag from "@/entities/warning-caution-tag/ui/WarningCautionTag";
+import { cn } from "@/shared/lib";
+import { WarningCautionTag } from "@/entities/warning-caution-tag";
 import Link from "next/link";
 
 const CoinRow = memo((props: CoinViewModel) => {

@@ -2,14 +2,9 @@
 
 import React from "react";
 import CandleUnitButton from "./CandleUnitButton";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTitle,
-  PopoverTrigger,
-} from "@/shared/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui";
 import { PopoverClose } from "@radix-ui/react-popover";
-import { CandleUnit, MinutesUnit } from "@/entities/candle/model/type";
+import { CandleUnit, MinutesUnit } from "@/entities/candle";
 
 type Props = {
   candleUnit: CandleUnit;

@@ -1,5 +1,4 @@
-import { cn } from "@/shared/lib/utils";
-import { MarketEvent } from "@/entities/market/model/type";
+import { cn } from "@/shared/lib";
 import React from "react";
 
 const WarningCautionTag = ({ type }: { type: "WARN" | "CAUT" }) => {

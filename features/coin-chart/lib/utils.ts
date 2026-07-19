@@ -1,5 +1,5 @@
-import { UpbitCandle } from "@/entities/candle/model/type";
-import { upbitCandleToTimeSec } from "@/entities/candle/lib/utils";
+import type { UpbitCandle } from "@/entities/candle";
+import { upbitCandleToTimeSec } from "@/entities/candle";
 import { CandlestickData, HistogramData, Time } from "lightweight-charts";
 
 /** 캔들(OHLC) 데이터 변환 */
