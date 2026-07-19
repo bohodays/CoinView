@@ -1,6 +1,8 @@
 import type { Market } from "@/entities/market";
+import { requireEnv } from "@/shared/lib";
 import { v4 as uuidv4 } from "uuid";
 import { useTickerStore } from "../model/ticker.store";
+import { tickerWsMessageSchema } from "../model/type";
 
 const MAX_RECONNECT_DELAY_MS = 30_000;
 
@@ -9,7 +11,10 @@ let subscribedCodes: string[] = [];
 let reconnectTimer: ReturnType<typeof setTimeout> | null = null;
 let reconnectAttempt = 0;
 let isManuallyDisconnected = false;
-const WS_URL = process.env.NEXT_PUBLIC_UPBIT_WEBSOCKET_BASE_URL;
+const WS_URL = requireEnv(
+  process.env.NEXT_PUBLIC_UPBIT_WEBSOCKET_BASE_URL,
+  "NEXT_PUBLIC_UPBIT_WEBSOCKET_BASE_URL",
+);
 
 export const connectTickerSocket = (codes: Market[]) => {
   connectTickerSocketByCodes(codes.map((code) => code.market));
@@ -46,7 +51,7 @@ export const unsubscribeTickerCodes = (codes: string[]) => {
 function openSocket() {
   clearReconnectTimer();
 
-  socket = new WebSocket(WS_URL as string);
+  socket = new WebSocket(WS_URL);
 
   socket.onopen = () => {
     reconnectAttempt = 0;
@@ -55,10 +60,11 @@ function openSocket() {
 
   socket.onmessage = async (event) => {
     const data = await (event.data as Blob).text();
-    const ticker = JSON.parse(data);
+    const parsed = tickerWsMessageSchema.safeParse(JSON.parse(data));
+    if (!parsed.success) return;
 
     // Ticker Store에 저장
-    useTickerStore.getState().updateTicker(ticker);
+    useTickerStore.getState().updateTicker(parsed.data);
   };
 
   socket.onclose = () => {

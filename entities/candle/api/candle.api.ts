@@ -1,4 +1,7 @@
-import { CandleUnit, MinutesUnit } from "../model/type";
+import { CandleUnit, MinutesUnit, upbitCandleSchema } from "../model/type";
+import { z } from "zod";
+
+const upbitCandleListSchema = z.array(upbitCandleSchema);
 
 export const fetchCandle = async ({
   market,
@@ -35,7 +38,8 @@ export const fetchCandle = async ({
       throw new Error(errorBody?.message ?? "Failed to fetch candle");
     }
 
-    return response.json();
+    const data = await response.json();
+    return upbitCandleListSchema.parse(data);
   } catch (error) {
     throw error;
   }

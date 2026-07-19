@@ -1,3 +1,8 @@
+import { marketSchema } from "../model/type";
+import { z } from "zod";
+
+const marketListSchema = z.array(marketSchema);
+
 export const fetchMarketData = async () => {
   try {
     const response = await fetch(`/api/upbit/market`);
@@ -7,7 +12,8 @@ export const fetchMarketData = async () => {
       throw new Error(errorBody?.message ?? "Failed to fetch market");
     }
 
-    return response.json();
+    const data = await response.json();
+    return marketListSchema.parse(data);
   } catch (error) {
     throw error;
   }

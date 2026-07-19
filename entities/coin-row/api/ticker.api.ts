@@ -1,3 +1,8 @@
+import { tickerSchema } from "../model/type";
+import { z } from "zod";
+
+const tickerListSchema = z.array(tickerSchema);
+
 export const fetchTickerAllData = async () => {
   try {
     const response = await fetch(`/api/upbit/ticker`);
@@ -7,7 +12,8 @@ export const fetchTickerAllData = async () => {
       throw new Error(errorBody?.message ?? "Failed to fetch ticker all");
     }
 
-    return response.json();
+    const data = await response.json();
+    return tickerListSchema.parse(data);
   } catch (error) {
     throw error;
   }

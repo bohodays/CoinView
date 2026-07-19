@@ -1,7 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { CandleUnit, MinutesUnit, UpbitCandle } from "../model/type";
+import {
+  CandleUnit,
+  MinutesUnit,
+  UpbitCandle,
+  upbitCandleWsMessageSchema,
+} from "../model/type";
 import { v4 as uuidv4 } from "uuid";
 import { minutesUnitTransWebSocketType } from "../lib/utils";
+import { requireEnv } from "@/shared/lib";
 
 type SocketStatus = "idle" | "connecting" | "open" | "closed" | "error";
 
@@ -28,7 +34,10 @@ type Params = {
   }) => void;
 };
 
-const WS_URL = process.env.NEXT_PUBLIC_UPBIT_WEBSOCKET_BASE_URL;
+const WS_URL = requireEnv(
+  process.env.NEXT_PUBLIC_UPBIT_WEBSOCKET_BASE_URL,
+  "NEXT_PUBLIC_UPBIT_WEBSOCKET_BASE_URL",
+);
 
 export const useUpbitCandleSocket = ({
   market,
@@ -105,7 +114,7 @@ export const useUpbitCandleSocket = ({
 
     setStatus("connecting");
 
-    const ws = new WebSocket(WS_URL as string);
+    const ws = new WebSocket(WS_URL);
     wsRef.current = ws;
 
     ws.onopen = () => {
@@ -117,13 +126,19 @@ export const useUpbitCandleSocket = ({
     ws.onmessage = async (event) => {
       try {
         const data = await (event.data as Blob).text();
-        const res: UpbitCandle = JSON.parse(data);
+        const parsed = upbitCandleWsMessageSchema.safeParse(JSON.parse(data));
+        if (!parsed.success) return;
+
+        // WS 메시지는 market 대신 code 필드를 사용하므로 내부 UpbitCandle 형태로 매핑
+        const { code, ...rest } = parsed.data;
+        const candle: UpbitCandle = { market: code, ...rest };
+
         onCandleRef.current({
           sessionId: sessionRef.current,
           market,
           candleUnit,
           minutesUnit,
-          candle: res,
+          candle,
         });
       } catch {
         // ignore

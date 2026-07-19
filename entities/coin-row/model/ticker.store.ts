@@ -1,9 +1,9 @@
 import { create } from "zustand";
-import { TickerWs } from "./type";
+import { TickerWs, TickerWsMessage } from "./type";
 
 type TickerState = {
   tickers: Record<string, TickerWs>;
-  updateTicker: (ticker: TickerWs) => void;
+  updateTicker: (ticker: TickerWsMessage) => void;
 };
 
 export const useTickerStore = create<TickerState>((set, get) => ({
