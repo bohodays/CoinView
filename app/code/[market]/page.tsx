@@ -1,5 +1,4 @@
 import { CoinDetailPage } from "@/views/coin-detail";
-import React from "react";
 
 type Props = {
   params: Promise<{
