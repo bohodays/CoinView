@@ -6,6 +6,7 @@ import { CoinChart } from "@/features/coin-chart";
 import { CoinCurrentPriceInfo } from "@/features/coin-current-price-info";
 import { DetailNavigator } from "@/features/detail-navigator";
 import { makeFullMarketName, useMarketData } from "@/entities/market";
+import { ErrorState } from "@/shared/ui";
 import { useState } from "react";
 
 type Props = {
@@ -15,19 +16,40 @@ type Props = {
 const CoinDetail = ({ market }: Props) => {
   const [candleUnit, setCandleUnit] = useState<CandleUnit>("seconds");
   const [minutesUnit, setMinutesUnit] = useState<MinutesUnit>(null);
-  const { candles, currentPrice, loadMore, isLoadingMore, isLoading } =
-    useCoinCandles({
-      market: market,
-      candleUnit,
-      minutesUnit,
-    });
+  const {
+    candles,
+    currentPrice,
+    loadMore,
+    isLoadingMore,
+    isLoading,
+    isError: isCandlesError,
+    refetch: refetchCandles,
+  } = useCoinCandles({
+    market: market,
+    candleUnit,
+    minutesUnit,
+  });
   const {
     data: marketData,
     isLoading: isMarketDataLoading,
+    isError: isMarketDataError,
+    refetch: refetchMarketData,
   } = useMarketData(); // 마켓데이터
 
-  if (isMarketDataLoading || isLoading || !marketData || !candles) {
+  if (isMarketDataLoading || isLoading) {
     return <CoinDetailSkeleton />;
+  }
+
+  if (isMarketDataError || isCandlesError || !marketData || !candles) {
+    return (
+      <ErrorState
+        message="시세 정보를 불러오지 못했습니다."
+        onRetry={() => {
+          refetchMarketData();
+          refetchCandles();
+        }}
+      />
+    );
   }
 
   const fullMarketName = makeFullMarketName(market, marketData);

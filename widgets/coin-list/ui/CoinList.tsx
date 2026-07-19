@@ -8,18 +8,24 @@ import {
   connetTickerSocket,
   disconnectTickerSocket,
 } from "@/entities/coin-row";
+import { ErrorState } from "@/shared/ui";
 
 const CoinList = () => {
   const {
     data: marketData,
     isLoading: isMarketDataLoading,
+    isError: isMarketDataError,
+    refetch: refetchMarketData,
   } = useMarketData(); // 마켓데이터
   const {
     data: tickerAllData,
     isLoading: isTickerDataLoading,
+    isError: isTickerDataError,
+    refetch: refetchTickerData,
   } = useTickerData(); // 티커 데이터
 
   const isFetching = isMarketDataLoading || isTickerDataLoading;
+  const isError = isMarketDataError || isTickerDataError;
   const coinViewModel = useMemo(() => {
     if (!tickerAllData || !marketData) return [];
 
@@ -40,6 +46,18 @@ const CoinList = () => {
   }, [coinViewModel, isFetching]);
 
   if (isFetching) return <CoinListSkeleton />;
+
+  if (isError) {
+    return (
+      <ErrorState
+        message="코인 목록을 불러오지 못했습니다."
+        onRetry={() => {
+          refetchMarketData();
+          refetchTickerData();
+        }}
+      />
+    );
+  }
 
   return (
     <div className="flex flex-col h-full">

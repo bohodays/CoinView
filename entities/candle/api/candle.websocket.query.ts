@@ -164,7 +164,9 @@ export const useCoinCandles = ({
     // history 상태
     isLoading: historyQuery.isLoading,
     isFetching: historyQuery.isFetching,
+    isError: historyQuery.isError,
     error: historyQuery.error,
+    refetch: historyQuery.refetch,
 
     // load more 상태
     loadMore,
