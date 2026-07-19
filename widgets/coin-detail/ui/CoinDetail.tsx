@@ -2,10 +2,10 @@
 
 import { useCoinCandles } from "@/entities/candle/api/candle.websocket.query";
 import { CandleUnit, MinutesUnit } from "@/entities/candle/model/type";
-import CandleUnitButtonsWrapper from "@/feature/candle-type-button/ui/CandleUnitButtonsWrapper";
-import CoinChart from "@/feature/coin-chart/ui/CoinChart";
-import CoinCurrentPriceInfo from "@/feature/coin-current-price-info/ui/CoinCurrentPriceInfo";
-import DetailNavigator from "@/feature/detail-navigator/ui/DetailNavigator";
+import CandleUnitButtonsWrapper from "@/features/candle-type-button/ui/CandleUnitButtonsWrapper";
+import CoinChart from "@/features/coin-chart/ui/CoinChart";
+import CoinCurrentPriceInfo from "@/features/coin-current-price-info/ui/CoinCurrentPriceInfo";
+import DetailNavigator from "@/features/detail-navigator/ui/DetailNavigator";
 import { makeFullMarketName } from "@/entities/market/lib/utils";
 import { useMarketData } from "@/entities/market/api/market.queries";
 import { useState } from "react";

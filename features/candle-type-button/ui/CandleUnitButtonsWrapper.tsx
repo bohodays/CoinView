@@ -7,7 +7,7 @@ import {
   PopoverContent,
   PopoverTitle,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/shared/ui/popover";
 import { PopoverClose } from "@radix-ui/react-popover";
 import { CandleUnit, MinutesUnit } from "@/entities/candle/model/type";
 

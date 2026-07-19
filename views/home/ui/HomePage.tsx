@@ -1,4 +1,4 @@
-import CoinSearchBar from "@/feature/coin-search/ui/CoinSearchBar";
+import CoinSearchBar from "@/features/coin-search/ui/CoinSearchBar";
 import CoinList from "@/widgets/coin-list/ui/CoinList";
 import Header from "@/widgets/header/ui/Header";
 

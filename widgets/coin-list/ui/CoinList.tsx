@@ -8,7 +8,7 @@ import { mergeMarketAndTicker } from "@/entities/market/lib/utils";
 import {
   connetTickerSocket,
   disconnectTickerSocket,
-} from "@/entities/coin-row/websocket/ticker.websocket";
+} from "@/entities/coin-row/api/ticker.websocket";
 
 const CoinList = () => {
   const {

@@ -10,7 +10,7 @@ import { useUpbitCandleSocket } from "./candle.websocket";
 import { upbitCandleToTimeSec } from "../lib/utils";
 import { useCandleHistoryInfiniteQuery } from "./candle.api.infinite.query";
 import { useTickerStore } from "@/entities/coin-row/model/ticker.store";
-import { connectTickerSocketByCodes } from "@/entities/coin-row/websocket/ticker.websocket";
+import { connectTickerSocketByCodes } from "@/entities/coin-row/api/ticker.websocket";
 
 function mergePagesToSortedUnique(pages: UpbitCandle[][]): UpbitCandle[] {
   // timeSec 기준 중복 제거 + 오름차순 정렬
