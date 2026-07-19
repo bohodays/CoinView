@@ -32,7 +32,7 @@ export const fetchCandle = async ({
 
     if (!response.ok) {
       const errorBody = await response.json().catch(() => null);
-      throw new Error(errorBody.message ?? "Failed to fetch candle");
+      throw new Error(errorBody?.message ?? "Failed to fetch candle");
     }
 
     return response.json();

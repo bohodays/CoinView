@@ -4,7 +4,7 @@ export const fetchTickerAllData = async () => {
 
     if (!response.ok) {
       const errorBody = await response.json().catch(() => null);
-      throw new Error(errorBody.message ?? "Failed to fetch ticker all");
+      throw new Error(errorBody?.message ?? "Failed to fetch ticker all");
     }
 
     return response.json();

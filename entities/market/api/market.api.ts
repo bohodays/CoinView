@@ -4,7 +4,7 @@ export const fetchMarketData = async () => {
 
     if (!response.ok) {
       const errorBody = await response.json().catch(() => null);
-      throw new Error(errorBody.message ?? "Failed to fetch market");
+      throw new Error(errorBody?.message ?? "Failed to fetch market");
     }
 
     return response.json();
