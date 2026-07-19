@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CandleUnit, MinutesUnit, UpbitCandle } from "../model/type";
 import { v4 as uuidv4 } from "uuid";
-import { minutesUnitTransWebSocketType } from "@/shared/lib/utils";
+import { minutesUnitTransWebSocketType } from "../lib/utils";
 
 type SocketStatus = "idle" | "connecting" | "open" | "closed" | "error";
 

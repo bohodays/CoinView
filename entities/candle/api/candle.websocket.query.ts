@@ -1,7 +1,7 @@
 import {
   isCandleWebSocketSupported,
   minutesUnitTransWebSocketType,
-} from "@/shared/lib/utils";
+} from "../lib/utils";
 import { InfiniteData, useQueryClient } from "@tanstack/react-query";
 import { CandleUnit, MinutesUnit, UpbitCandle } from "../model/type";
 import { useEffect, useMemo } from "react";

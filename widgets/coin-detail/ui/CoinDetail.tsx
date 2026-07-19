@@ -6,8 +6,8 @@ import CandleUnitButtonsWrapper from "@/feature/candle-type-button/ui/CandleUnit
 import CoinChart from "@/feature/coin-chart/ui/CoinChart";
 import CoinCurrentPriceInfo from "@/feature/coin-current-price-info/ui/CoinCurrentPriceInfo";
 import DetailNavigator from "@/feature/detail-navigator/ui/DetailNavigator";
-import { makeFullMarketName } from "@/shared/lib/utils";
-import { useMarketData } from "@/widgets/coin-list/api/market.queries";
+import { makeFullMarketName } from "@/entities/market/lib/utils";
+import { useMarketData } from "@/entities/market/api/market.queries";
 import { useState } from "react";
 
 type Props = {

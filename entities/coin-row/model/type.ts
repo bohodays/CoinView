@@ -1,4 +1,4 @@
-import { MarketEvent } from "@/widgets/coin-list/model/types";
+import { MarketEvent } from "@/entities/market/model/type";
 
 export type Ticker = {
   market: string;

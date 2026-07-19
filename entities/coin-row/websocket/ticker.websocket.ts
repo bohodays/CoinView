@@ -1,4 +1,4 @@
-import { Market } from "@/widgets/coin-list/model/types";
+import { Market } from "@/entities/market/model/type";
 import { v4 as uuidv4 } from "uuid";
 import { useTickerStore } from "../model/ticker.store";
 

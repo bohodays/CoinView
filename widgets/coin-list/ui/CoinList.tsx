@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useEffect, useMemo } from "react";
-import { useMarketData } from "../api/market.queries";
+import { useMarketData } from "@/entities/market/api/market.queries";
 import CoinRow from "@/entities/coin-row/ui/CoinRow";
 import { useTickerData } from "@/entities/coin-row/api/ticker.queries";
-import { mergeMarketAndTicker } from "@/shared/lib/utils";
+import { mergeMarketAndTicker } from "@/entities/market/lib/utils";
 import {
   connetTickerSocket,
   disconnectTickerSocket,

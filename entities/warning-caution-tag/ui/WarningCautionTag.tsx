@@ -1,5 +1,5 @@
 import { cn } from "@/shared/lib/utils";
-import { MarketEvent } from "@/widgets/coin-list/model/types";
+import { MarketEvent } from "@/entities/market/model/type";
 import React from "react";
 
 const WarningCautionTag = ({ type }: { type: "WARN" | "CAUT" }) => {

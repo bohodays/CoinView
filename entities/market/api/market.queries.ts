@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchMarketData } from "./market.api";
-import { Market } from "../model/types";
+import { Market } from "../model/type";
 
 export const marketQueryKeys = {
   allMarket: ["coin", "market", "all"],
