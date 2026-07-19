@@ -5,6 +5,8 @@ import { minutesUnitTransWebSocketType } from "../lib/utils";
 
 type SocketStatus = "idle" | "connecting" | "open" | "closed" | "error";
 
+const MAX_RECONNECT_DELAY_MS = 30_000;
+
 type Params = {
   market: string;
   candleUnit: CandleUnit;
@@ -39,6 +41,10 @@ export const useUpbitCandleSocket = ({
   const [status, setStatus] = useState<SocketStatus>("idle");
   const wsRef = useRef<WebSocket | null>(null);
   const ticketRef = useRef<string>(uuidv4());
+  const reconnectTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
+  const reconnectAttemptRef = useRef(0);
 
   // stale closure 방지
   const onCandleRef = useRef(onCandle);
@@ -59,7 +65,16 @@ export const useUpbitCandleSocket = ({
       ]);
   }, [candleUnit, minutesUnit, market]);
 
+  const clearReconnectTimer = () => {
+    if (reconnectTimerRef.current) {
+      clearTimeout(reconnectTimerRef.current);
+      reconnectTimerRef.current = null;
+    }
+  };
+
   const closeSocket = () => {
+    clearReconnectTimer();
+
     const ws = wsRef.current;
     wsRef.current = null;
     if (!ws) return;
@@ -94,6 +109,7 @@ export const useUpbitCandleSocket = ({
     wsRef.current = ws;
 
     ws.onopen = () => {
+      reconnectAttemptRef.current = 0;
       setStatus("open");
       ws.send(buildSubscribePayload());
     };
@@ -121,9 +137,21 @@ export const useUpbitCandleSocket = ({
     };
 
     ws.onclose = () => {
-      setStatus("closed");
       wsRef.current = null;
+      setStatus("closed");
+      scheduleReconnect();
     };
+  };
+
+  const scheduleReconnect = () => {
+    if (!enabled || !market) return;
+
+    const delay = Math.min(
+      1000 * 2 ** reconnectAttemptRef.current,
+      MAX_RECONNECT_DELAY_MS,
+    );
+    reconnectAttemptRef.current += 1;
+    reconnectTimerRef.current = setTimeout(connectIfNeeded, delay);
   };
 
   // enabled/market 변화: 연결 on/off
@@ -134,6 +162,7 @@ export const useUpbitCandleSocket = ({
       return;
     }
 
+    reconnectAttemptRef.current = 0;
     connectIfNeeded();
     return closeSocket;
   }, [enabled, market]);

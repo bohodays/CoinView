@@ -12,6 +12,7 @@ import { useCandleHistoryInfiniteQuery } from "./candle.api.infinite.query";
 import {
   useTickerStore,
   connectTickerSocketByCodes,
+  unsubscribeTickerCodes,
 } from "@/entities/coin-row";
 
 function mergePagesToSortedUnique(pages: UpbitCandle[][]): UpbitCandle[] {
@@ -62,6 +63,10 @@ export const useCoinCandles = ({
     if (!historyQuery.isSuccess || !market || supportsCandleWs) return;
 
     connectTickerSocketByCodes([market]);
+
+    return () => {
+      unsubscribeTickerCodes([market]);
+    };
   }, [historyQuery.isSuccess, market, supportsCandleWs]);
 
   const { status: wsStatus } = useUpbitCandleSocket({

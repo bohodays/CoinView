@@ -5,7 +5,7 @@ import { useMarketData, mergeMarketAndTicker } from "@/entities/market";
 import {
   CoinRow,
   useTickerData,
-  connetTickerSocket,
+  connectTickerSocket,
   disconnectTickerSocket,
 } from "@/entities/coin-row";
 import { ErrorState } from "@/shared/ui";
@@ -38,7 +38,7 @@ const CoinList = () => {
   useEffect(() => {
     if (isFetching || !coinViewModel.length) return;
 
-    connetTickerSocket(coinViewModel);
+    connectTickerSocket(coinViewModel);
 
     return () => {
       disconnectTickerSocket();
