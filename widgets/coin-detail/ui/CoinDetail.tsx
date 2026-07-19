@@ -75,6 +75,7 @@ const CoinDetail = ({ market }: Props) => {
       {/* 캔들 타입 선택 버튼 */}
       <CandleUnitButtonsWrapper
         candleUnit={candleUnit}
+        minutesUnit={minutesUnit}
         onChangeCandleUnit={onChangeCandleUnit}
         onChangeMinutesUnit={onChangeMinutesUnit}
       />
