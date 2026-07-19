@@ -28,6 +28,9 @@ export function mergeMarketAndTicker({
 export function makeFullMarketName(market: string, markets: Market[]) {
   const splitedMarket = market.split("-");
   const marketName = `${splitedMarket[1]}/${splitedMarket[0]}`;
-  const fullMarketName = `${markets.filter((item) => item.market === market)[0].korean_name} (${marketName})`;
-  return fullMarketName;
+  const matched = markets.find((item) => item.market === market);
+
+  if (!matched) return marketName;
+
+  return `${matched.korean_name} (${marketName})`;
 }
