@@ -7,7 +7,7 @@ import { CandleUnit, MinutesUnit, UpbitCandle } from "../model/type";
 import { useEffect, useMemo } from "react";
 import { candleKeys } from "./candle.keys";
 import { useUpbitCandleSocket } from "./candle.websocket";
-import { upbitCandleToTimeSec } from "@/feature/coin-chart/lib/utils";
+import { upbitCandleToTimeSec } from "../lib/utils";
 import { useCandleHistoryInfiniteQuery } from "./candle.api.infinite.query";
 import { useTickerStore } from "@/entities/coin-row/model/ticker.store";
 import { connectTickerSocketByCodes } from "@/entities/coin-row/websocket/ticker.websocket";
