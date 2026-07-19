@@ -1,15 +1,15 @@
-import CoinDetail from "@/widgets/coin-detail/ui/CoinDetail";
+import CoinDetailPage from "@/views/coin-detail/ui/CoinDetailPage";
 import React from "react";
 
 type Props = {
-  params: {
+  params: Promise<{
     market: string;
-  };
+  }>;
 };
 
 const Page = async ({ params }: Props) => {
   const { market } = await params;
-  return <CoinDetail market={market} />;
+  return <CoinDetailPage market={market} />;
 };
 
 export default Page;
