@@ -52,9 +52,21 @@ const CoinRow = memo((props: CoinViewModel) => {
     );
   }
 
-  // 전일대비 색상 적용을 위한 CSS 변수 (양수 / 빨간색, 음수 / 파란색)
+  // 전일대비 방향: 색상만으로 구분하면 색맹 사용자가 상승/보합/하락을
+  // 구별할 수 없어 부호를 함께 표기 (하락은 원본 값에 이미 "-"가 있음)
+  const changeDirection =
+    ticker.signed_change_rate > 0
+      ? "RISE"
+      : ticker.signed_change_rate < 0
+        ? "FALL"
+        : "EVEN";
   const signedTextColor =
-    ticker.signed_change_rate > 0 ? "text-red-500" : "text-blue-500";
+    changeDirection === "RISE"
+      ? "text-red-500"
+      : changeDirection === "FALL"
+        ? "text-blue-500"
+        : "text-muted-foreground";
+  const changeSign = changeDirection === "RISE" ? "+" : "";
 
   return (
     <Link href={`/code/${market}`}>
@@ -88,8 +100,8 @@ const CoinRow = memo((props: CoinViewModel) => {
 
         <div className="flex justify-end">
           <div className={cn("flex flex-col text-right", signedTextColor)}>
-            <div>{`${(ticker.signed_change_rate * 100).toFixed(2)}%`}</div>
-            <div>{ticker.signed_change_price.toLocaleString("ko-KR")}</div>
+            <div>{`${changeSign}${(ticker.signed_change_rate * 100).toFixed(2)}%`}</div>
+            <div>{`${changeSign}${ticker.signed_change_price.toLocaleString("ko-KR")}`}</div>
           </div>
         </div>
       </div>
