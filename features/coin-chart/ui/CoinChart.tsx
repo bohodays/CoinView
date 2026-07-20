@@ -13,13 +13,46 @@ import { upbitCandlesToSeriesData } from "../lib/utils";
 // 차트 좌측 끝에서 이 값(logical index) 미만으로 가까워지면 과거 데이터 로드
 const LOAD_MORE_THRESHOLD = 10;
 
+/**
+ * 임의의 CSS 색상 문자열(oklch/lab/color() 포함)을 rgb(...)로 확정 변환한다.
+ * 최신 Chromium은 getComputedStyle이 oklch() 표기를 그대로 보존해서
+ * 반환하기 때문에(예전처럼 항상 rgb로 내려주지 않음) 문자열만으로는
+ * lightweight-charts(canvas 기반, oklch 파싱 불가)에 안전하게 넘길 수
+ * 없다. 1x1 캔버스에 실제로 그려서 픽셀을 다시 읽으면 색공간과 무관하게
+ * 항상 확정된 RGB 값을 얻을 수 있다.
+ */
+function resolveCssColorToRgb(cssColor: string, fallback: string): string {
+  if (typeof document === "undefined") return fallback;
+
+  try {
+    const canvas = document.createElement("canvas");
+    canvas.width = 1;
+    canvas.height = 1;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return fallback;
+
+    ctx.fillStyle = cssColor;
+    ctx.fillRect(0, 0, 1, 1);
+    const [r, g, b, a] = ctx.getImageData(0, 0, 1, 1).data;
+
+    return a === 255 ? `rgb(${r}, ${g}, ${b})` : `rgba(${r}, ${g}, ${b}, ${a / 255})`;
+  } catch {
+    return fallback;
+  }
+}
+
 /** globals.css에 정의된 --muted-foreground 테마 토큰 값을 읽어온다 */
 function getMutedForegroundColor(): string {
   if (typeof window === "undefined") return "#6b7280";
-  const value = getComputedStyle(document.documentElement)
-    .getPropertyValue("--muted-foreground")
-    .trim();
-  return value || "#6b7280";
+
+  const probe = document.createElement("div");
+  probe.style.color = "var(--muted-foreground)";
+  probe.style.display = "none";
+  document.body.appendChild(probe);
+  const computed = getComputedStyle(probe).color;
+  document.body.removeChild(probe);
+
+  return resolveCssColorToRgb(computed || "#6b7280", "#6b7280");
 }
 
 const CoinChart = ({
