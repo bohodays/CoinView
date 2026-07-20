@@ -7,6 +7,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useId, useMemo, useState } from "react";
 
+const MAX_SEARCH_RESULTS = 8;
+// 검색 결과 클릭(mousedown->blur) 이벤트가 blur보다 먼저 처리되도록 주는 지연
+const BLUR_CLOSE_DELAY_MS = 120;
+
 const CoinSearchBar = React.forwardRef<
   HTMLInputElement,
   React.ComponentProps<"input">
@@ -52,7 +56,7 @@ const CoinSearchBar = React.forwardRef<
             );
           },
         )
-        .slice(0, 8);
+        .slice(0, MAX_SEARCH_RESULTS);
     }, [marketData, normalizedKeyword]);
 
     const showResults = isFocused && normalizedKeyword.length > 0;
@@ -98,7 +102,7 @@ const CoinSearchBar = React.forwardRef<
               onFocus?.(event);
             }}
             onBlur={(event) => {
-              window.setTimeout(() => setIsFocused(false), 120);
+              window.setTimeout(() => setIsFocused(false), BLUR_CLOSE_DELAY_MS);
               onBlur?.(event);
             }}
             onKeyDown={(event) => {

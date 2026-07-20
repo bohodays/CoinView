@@ -9,6 +9,9 @@ import {
 import React, { useEffect, useMemo, useRef } from "react";
 import { upbitCandlesToSeriesData } from "../lib/utils";
 
+// 차트 좌측 끝에서 이 값(logical index) 미만으로 가까워지면 과거 데이터 로드
+const LOAD_MORE_THRESHOLD = 10;
+
 const CoinChart = ({
   candles,
   isLoadingMore,
@@ -79,8 +82,7 @@ const CoinChart = ({
     const handler = (range: { from: number; to: number } | null) => {
       if (!range) return;
 
-      const THRESHOLD = 10;
-      const isNearLeft = range.from < THRESHOLD;
+      const isNearLeft = range.from < LOAD_MORE_THRESHOLD;
 
       if (!isNearLeft) {
         enteredThresholdRef.current = false;

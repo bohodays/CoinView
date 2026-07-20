@@ -7,6 +7,9 @@ import { cn } from "@/shared/lib";
 import { WarningCautionTag } from "@/entities/warning-caution-tag";
 import Link from "next/link";
 
+// 가격 변동 시 border flash 효과 지속 시간
+const FLASH_DURATION_MS = 250;
+
 const CoinRow = memo((props: CoinViewModel) => {
   const { market, korean_name: koreanName, market_event: marketEvent } = props;
   // primitive만 구독 (Zustand는 selector가 반환하는 값이 Object.is로 동일하면 리렌더 방지)
@@ -34,7 +37,7 @@ const CoinRow = memo((props: CoinViewModel) => {
 
     if (prev !== null && prev !== next) {
       const startId = window.setTimeout(() => setFlash(true), 0);
-      const endId = window.setTimeout(() => setFlash(false), 250);
+      const endId = window.setTimeout(() => setFlash(false), FLASH_DURATION_MS);
 
       return () => {
         window.clearTimeout(startId);
