@@ -1,6 +1,6 @@
 "use client";
 
-import React, { memo, useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { CoinViewModel } from "../model/type";
 import { useTickerStore } from "../model/ticker.store";
 import { cn } from "@/shared/lib";
@@ -74,21 +74,20 @@ const CoinRow = memo((props: CoinViewModel) => {
   return (
     <Link href={`/code/${market}`}>
       <div className="grid grid-cols-[180px_1fr_120px] items-center px-4 py-2 border-border hover:bg-muted/40 transition-colors border-t-3 first:border-t-0 cursor-pointer">
-        <div className="flex flex-col">
+        <div className="flex min-w-0 flex-col">
           <div className="flex items-center gap-1">
-            <div>{koreanName}</div>
-            <div className="flex gap-1">
+            <div className="truncate">{koreanName}</div>
+            <div className="flex shrink-0 gap-1">
               {marketEvent.warning && <WarningCautionTag type="WARN" />}
               {isCaution && <WarningCautionTag type="CAUT" />}
             </div>
-            <div></div>
           </div>
-          <div>{`${splitedMarketName[1]}/${splitedMarketName[0]}`}</div>
+          <div className="truncate">{`${splitedMarketName[1]}/${splitedMarketName[0]}`}</div>
         </div>
 
         <div
           className={cn(
-            "text-right tabular-nums transition-colors duration-150 border-2 p-2 border-transparent",
+            "min-w-0 truncate text-right tabular-nums transition-colors duration-150 border-2 p-2 border-transparent",
             signedTextColor,
             flash &&
               (ticker.current_change === "RISE"
@@ -101,10 +100,10 @@ const CoinRow = memo((props: CoinViewModel) => {
           {ticker.trade_price.toLocaleString("ko-KR")}
         </div>
 
-        <div className="flex justify-end">
-          <div className={cn("flex flex-col text-right", signedTextColor)}>
-            <div>{`${changeSign}${(ticker.signed_change_rate * 100).toFixed(2)}%`}</div>
-            <div>{`${changeSign}${ticker.signed_change_price.toLocaleString("ko-KR")}`}</div>
+        <div className="flex min-w-0 justify-end">
+          <div className={cn("flex min-w-0 flex-col text-right", signedTextColor)}>
+            <div className="truncate">{`${changeSign}${(ticker.signed_change_rate * 100).toFixed(2)}%`}</div>
+            <div className="truncate">{`${changeSign}${ticker.signed_change_price.toLocaleString("ko-KR")}`}</div>
           </div>
         </div>
       </div>
@@ -126,12 +125,12 @@ const CoinRowSkeleton = ({
       className="grid grid-cols-[180px_1fr_120px] items-center border-t-3 border-border px-4 py-2 first:border-t-0"
       aria-label={`${koreanName} 시세 로딩 중`}
     >
-      <div className="flex flex-col gap-2">
+      <div className="flex min-w-0 flex-col gap-2">
         <div className="flex items-center gap-1">
-          <div>{koreanName}</div>
-          <div className="h-4 w-10 animate-pulse rounded-md bg-muted" />
+          <div className="truncate">{koreanName}</div>
+          <div className="h-4 w-10 shrink-0 animate-pulse rounded-md bg-muted" />
         </div>
-        <div>{marketName}</div>
+        <div className="truncate">{marketName}</div>
       </div>
 
       <div className="ml-auto h-8 w-28 animate-pulse rounded-md bg-muted" />

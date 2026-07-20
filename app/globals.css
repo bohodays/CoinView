@@ -121,7 +121,9 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    /* 데스크톱 뷰포트에서 모바일 프레임이 카드처럼 도드라지도록 배경을
+       프레임 내부(bg-background)와 다르게 둠 */
+    @apply bg-muted text-foreground;
   }
 }
 
