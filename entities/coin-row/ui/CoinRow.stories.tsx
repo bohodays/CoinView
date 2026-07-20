@@ -62,6 +62,16 @@ const meta: Meta<typeof CoinRow> = {
   title: "entities/coin-row/CoinRow",
   component: CoinRow,
   parameters: { layout: "padded" },
+  // 실제 앱에서 CoinRow는 프레임의 bg-background(라이트 모드 기준 흰색)
+  // 위에 렌더됨. Storybook 기본 캔버스 배경(연회색)은 이보다 살짝 어두워
+  // 텍스트 명암비 검사가 실제와 다르게 나오므로 실제 배경을 재현한다.
+  decorators: [
+    (Story) => (
+      <div className="bg-background text-foreground">
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export default meta;

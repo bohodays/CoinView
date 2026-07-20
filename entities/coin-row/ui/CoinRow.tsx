@@ -63,11 +63,13 @@ const CoinRow = memo((props: CoinViewModel) => {
       : ticker.signed_change_rate < 0
         ? "FALL"
         : "EVEN";
+  // text-red-500/text-blue-500은 흰 배경 기준 명암비가 각각 3.76:1,
+  // 3.68:1로 WCAG AA(4.5:1) 미달이라 -600 톤 사용
   const signedTextColor =
     changeDirection === "RISE"
-      ? "text-red-500"
+      ? "text-red-600"
       : changeDirection === "FALL"
-        ? "text-blue-500"
+        ? "text-blue-600"
         : "text-muted-foreground";
   const changeSign = changeDirection === "RISE" ? "+" : "";
 
