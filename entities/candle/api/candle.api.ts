@@ -1,9 +1,10 @@
 import { CandleUnit, MinutesUnit, upbitCandleSchema } from "../model/type";
+import { apiFetch } from "@/shared/api";
 import { z } from "zod";
 
 const upbitCandleListSchema = z.array(upbitCandleSchema);
 
-export const fetchCandle = async ({
+export const fetchCandle = ({
   market,
   candleUnit,
   minutesUnit,
@@ -18,17 +19,8 @@ export const fetchCandle = async ({
   if (minutesUnit) params.set("minutesUnit", minutesUnit);
   if (to) params.set("to", to);
 
-  try {
-    const response = await fetch(`/api/upbit/candles?${params.toString()}`);
-
-    if (!response.ok) {
-      const errorBody = await response.json().catch(() => null);
-      throw new Error(errorBody?.message ?? "Failed to fetch candle");
-    }
-
-    const data = await response.json();
-    return upbitCandleListSchema.parse(data);
-  } catch (error) {
-    throw error;
-  }
+  return apiFetch(
+    `/api/upbit/candles?${params.toString()}`,
+    upbitCandleListSchema,
+  );
 };
