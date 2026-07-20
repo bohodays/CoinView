@@ -6,11 +6,21 @@ import {
   IChartApi,
   ISeriesApi,
 } from "lightweight-charts";
+import { useTheme } from "next-themes";
 import React, { useEffect, useMemo, useRef } from "react";
 import { upbitCandlesToSeriesData } from "../lib/utils";
 
 // 차트 좌측 끝에서 이 값(logical index) 미만으로 가까워지면 과거 데이터 로드
 const LOAD_MORE_THRESHOLD = 10;
+
+/** globals.css에 정의된 --muted-foreground 테마 토큰 값을 읽어온다 */
+function getMutedForegroundColor(): string {
+  if (typeof window === "undefined") return "#6b7280";
+  const value = getComputedStyle(document.documentElement)
+    .getPropertyValue("--muted-foreground")
+    .trim();
+  return value || "#6b7280";
+}
 
 const CoinChart = ({
   candles,
@@ -21,6 +31,7 @@ const CoinChart = ({
   isLoadingMore: boolean;
   onLoadMore: () => Promise<void>;
 }) => {
+  const { resolvedTheme } = useTheme();
   const { candleData, volumeData, firstTimeSec, lastTimeSec } = useMemo(() => {
     return upbitCandlesToSeriesData(candles ?? []);
   }, [candles]);
@@ -56,7 +67,10 @@ const CoinChart = ({
         timeVisible: true,
         secondsVisible: true,
       },
-      layout: { background: { color: "transparent" }, textColor: "#6b7280" },
+      layout: {
+        background: { color: "transparent" },
+        textColor: getMutedForegroundColor(),
+      },
       grid: { vertLines: { visible: false }, horzLines: { visible: false } },
       crosshair: { mode: 1 },
     });
@@ -117,6 +131,13 @@ const CoinChart = ({
       lastAppliedTimeRef.current = null;
     };
   }, []);
+
+  // 다크모드 전환 시 축 텍스트 색상을 테마 토큰에 맞춰 갱신
+  useEffect(() => {
+    chartRef.current?.applyOptions({
+      layout: { textColor: getMutedForegroundColor() },
+    });
+  }, [resolvedTheme]);
 
   useEffect(() => {
     const candleSeries = candleSeriesRef.current;
