@@ -1,32 +1,20 @@
 import {
   isCandleWebSocketSupported,
   minutesUnitTransWebSocketType,
+  mergePagesToSortedUnique,
+  upbitCandleToTimeSec,
 } from "../lib/utils";
 import { InfiniteData, useQueryClient } from "@tanstack/react-query";
 import { CandleUnit, MinutesUnit, UpbitCandle } from "../model/type";
 import { useEffect, useMemo } from "react";
 import { candleKeys } from "./candle.keys";
 import { useUpbitCandleSocket } from "./candle.websocket";
-import { upbitCandleToTimeSec } from "../lib/utils";
 import { useCandleHistoryInfiniteQuery } from "./candle.api.infinite.query";
 import {
   useTickerStore,
   connectTickerSocketByCodes,
   unsubscribeTickerCodes,
 } from "@/entities/coin-row";
-
-function mergePagesToSortedUnique(pages: UpbitCandle[][]): UpbitCandle[] {
-  // timeSec 기준 중복 제거 + 오름차순 정렬
-  const map = new Map<number, UpbitCandle>();
-  for (const page of pages) {
-    for (const c of page) {
-      map.set(upbitCandleToTimeSec(c), c);
-    }
-  }
-  return Array.from(map.entries())
-    .sort((a, b) => a[0] - b[0])
-    .map(([, c]) => c);
-}
 
 export const useCoinCandles = ({
   market,
