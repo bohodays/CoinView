@@ -14,24 +14,12 @@ export const fetchCandle = async ({
   minutesUnit?: MinutesUnit;
   to?: string;
 }) => {
-  let TARGET_URL = "";
-  let response;
-  try {
-    if (to) {
-      if (minutesUnit) {
-        TARGET_URL = `/api/upbit/candles?market=${market}&candleUnit=${candleUnit}&minutesUnit=${minutesUnit}&to=${to}`;
-      } else {
-        TARGET_URL = `/api/upbit/candles?market=${market}&candleUnit=${candleUnit}&to=${to}`;
-      }
-    } else {
-      if (minutesUnit) {
-        TARGET_URL = `/api/upbit/candles?market=${market}&candleUnit=${candleUnit}&minutesUnit=${minutesUnit}`;
-      } else {
-        TARGET_URL = `/api/upbit/candles?market=${market}&candleUnit=${candleUnit}`;
-      }
-    }
+  const params = new URLSearchParams({ market, candleUnit });
+  if (minutesUnit) params.set("minutesUnit", minutesUnit);
+  if (to) params.set("to", to);
 
-    response = await fetch(TARGET_URL);
+  try {
+    const response = await fetch(`/api/upbit/candles?${params.toString()}`);
 
     if (!response.ok) {
       const errorBody = await response.json().catch(() => null);

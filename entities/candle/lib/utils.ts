@@ -19,6 +19,14 @@ export function minutesUnitTransWebSocketType(
   return "candle.";
 }
 
+/** Upbit 캔들 API의 candleUnit(+minutesUnit) 경로 세그먼트 (예: "minutes/1") */
+export function candleUnitPathSegment(
+  candleUnit: string,
+  minutesUnit?: string | null,
+): string {
+  return minutesUnit ? `${candleUnit}/${minutesUnit}` : candleUnit;
+}
+
 export function isCandleWebSocketSupported(
   candleUnit: CandleUnit,
   minutesUnit?: MinutesUnit,
