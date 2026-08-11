@@ -1,0 +1,1714 @@
+{
+  "measuredAt": "2026-08-11T16:05:22.894Z",
+  "url": "http://localhost:3000/?debug=profile",
+  "durationMs": 20000,
+  "totalCommits": 1526,
+  "mount": {
+    "totalCommits": 283,
+    "listContainer": {
+      "id": "coin-list",
+      "commits": 1,
+      "avgDurationMs": 8.3,
+      "maxDurationMs": 8.3
+    }
+  },
+  "update": {
+    "totalCommits": 1243,
+    "listContainer": {
+      "id": "coin-list",
+      "commits": 620,
+      "avgDurationMs": 0.162,
+      "maxDurationMs": 9.9
+    },
+    "distinctRowsUpdated": 281,
+    "totalRowCommits": 623,
+    "perRow": [
+      {
+        "id": "KRW-CAP",
+        "commits": 40,
+        "avgDurationMs": 0.145,
+        "maxDurationMs": 0.6
+      },
+      {
+        "id": "KRW-DOS",
+        "commits": 40,
+        "avgDurationMs": 0.095,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-HOME",
+        "commits": 29,
+        "avgDurationMs": 0.083,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-RVN",
+        "commits": 21,
+        "avgDurationMs": 0.09,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-USDT",
+        "commits": 18,
+        "avgDurationMs": 0.644,
+        "maxDurationMs": 9.6
+      },
+      {
+        "id": "KRW-XRP",
+        "commits": 13,
+        "avgDurationMs": 0.108,
+        "maxDurationMs": 0.3
+      },
+      {
+        "id": "KRW-ETH",
+        "commits": 13,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-BTC",
+        "commits": 12,
+        "avgDurationMs": 0.108,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-ETC",
+        "commits": 10,
+        "avgDurationMs": 0.11,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-MMT",
+        "commits": 8,
+        "avgDurationMs": 0.063,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-CARV",
+        "commits": 8,
+        "avgDurationMs": 0.162,
+        "maxDurationMs": 0.3
+      },
+      {
+        "id": "KRW-SLX",
+        "commits": 7,
+        "avgDurationMs": 0.129,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-ESP",
+        "commits": 7,
+        "avgDurationMs": 0.071,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-QTUM",
+        "commits": 7,
+        "avgDurationMs": 0.071,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-GRVT",
+        "commits": 6,
+        "avgDurationMs": 0.083,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-RE",
+        "commits": 6,
+        "avgDurationMs": 0.033,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-ONDO",
+        "commits": 6,
+        "avgDurationMs": 0.067,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-SHIB",
+        "commits": 6,
+        "avgDurationMs": 0.117,
+        "maxDurationMs": 0.3
+      },
+      {
+        "id": "KRW-AVAX",
+        "commits": 6,
+        "avgDurationMs": 0.117,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-TRUMP",
+        "commits": 6,
+        "avgDurationMs": 0.067,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-PENDLE",
+        "commits": 6,
+        "avgDurationMs": 0.15,
+        "maxDurationMs": 0.3
+      },
+      {
+        "id": "KRW-SOL",
+        "commits": 5,
+        "avgDurationMs": 0.06,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-KAITO",
+        "commits": 5,
+        "avgDurationMs": 0.12,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-TRX",
+        "commits": 5,
+        "avgDurationMs": 0.08,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-OPEN",
+        "commits": 5,
+        "avgDurationMs": 0.06,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-IOST",
+        "commits": 5,
+        "avgDurationMs": 0.08,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-QUID",
+        "commits": 4,
+        "avgDurationMs": 0.175,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-XLM",
+        "commits": 4,
+        "avgDurationMs": 0.125,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-LINK",
+        "commits": 4,
+        "avgDurationMs": 0.075,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-RENDER",
+        "commits": 4,
+        "avgDurationMs": 0.075,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-BSV",
+        "commits": 4,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-ELF",
+        "commits": 4,
+        "avgDurationMs": 0.125,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-GEOD",
+        "commits": 3,
+        "avgDurationMs": 0.033,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-DOGE",
+        "commits": 3,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-VIRTUAL",
+        "commits": 3,
+        "avgDurationMs": 0.067,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-PENGU",
+        "commits": 3,
+        "avgDurationMs": 0.167,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-MIRA",
+        "commits": 3,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-JTO",
+        "commits": 3,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-ICP",
+        "commits": 3,
+        "avgDurationMs": 0.2,
+        "maxDurationMs": 0.3
+      },
+      {
+        "id": "KRW-VANA",
+        "commits": 3,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-BIGTIME",
+        "commits": 3,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-SPK",
+        "commits": 3,
+        "avgDurationMs": 0.067,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-WAL",
+        "commits": 3,
+        "avgDurationMs": 0.033,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-LSK",
+        "commits": 3,
+        "avgDurationMs": 0.033,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-AUCTION",
+        "commits": 3,
+        "avgDurationMs": 0.067,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-HUNT",
+        "commits": 3,
+        "avgDurationMs": 0.033,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-ALT",
+        "commits": 3,
+        "avgDurationMs": 0.067,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-BOUNTY",
+        "commits": 3,
+        "avgDurationMs": 0.133,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-ME",
+        "commits": 2,
+        "avgDurationMs": 0.05,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-ZBT",
+        "commits": 2,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-LA",
+        "commits": 2,
+        "avgDurationMs": 0.15,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-PUMP",
+        "commits": 2,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-ELSA",
+        "commits": 2,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-MEGA",
+        "commits": 2,
+        "avgDurationMs": 0.05,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-BCH",
+        "commits": 2,
+        "avgDurationMs": 0.05,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-CC",
+        "commits": 2,
+        "avgDurationMs": 0.05,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-XEC",
+        "commits": 2,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-AZTEC",
+        "commits": 2,
+        "avgDurationMs": 0.05,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-ATOM",
+        "commits": 2,
+        "avgDurationMs": 0.05,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-IN",
+        "commits": 2,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-G",
+        "commits": 2,
+        "avgDurationMs": 0.05,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-2Z",
+        "commits": 2,
+        "avgDurationMs": 0.15,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-ZRX",
+        "commits": 2,
+        "avgDurationMs": 0.05,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-IQ",
+        "commits": 2,
+        "avgDurationMs": 0.05,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-THETA",
+        "commits": 2,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-RAY",
+        "commits": 2,
+        "avgDurationMs": 0.05,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-EDGE",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-WLD",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-EUL",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-0G",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-ADA",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-TT",
+        "commits": 1,
+        "avgDurationMs": 0.2,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-ID",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-MOVE",
+        "commits": 1,
+        "avgDurationMs": 0.2,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-SUI",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-ENA",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-NEAR",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-HBAR",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-BSB",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-DRV",
+        "commits": 1,
+        "avgDurationMs": 0.2,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-ARX",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-BIRB",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-PRL",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-SAHARA",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-TAO",
+        "commits": 1,
+        "avgDurationMs": 0.2,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-XPL",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-IRYS",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-DATA",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-META2",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-UNI",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-ENSO",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-ARB",
+        "commits": 1,
+        "avgDurationMs": 0.2,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-OPG",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-BLEND",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-FF",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-STORJ",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-USDC",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-KITE",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-WLFI",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-ERA",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-POL",
+        "commits": 1,
+        "avgDurationMs": 0.2,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-STX",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-AAVE",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-ARDR",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-SEI",
+        "commits": 1,
+        "avgDurationMs": 0.2,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-ICX",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-SOON",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-PIEVERSE",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-ALGO",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-BERA",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-SAND",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-PEPE",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-PLUME",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-ZAMA",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-MON",
+        "commits": 1,
+        "avgDurationMs": 0.2,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-ENS",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-HOLO",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-B3",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-BIO",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-CHIP",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-AXS",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-UP2",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-AKT",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-SOPH",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-KMNO",
+        "commits": 1,
+        "avgDurationMs": 0.2,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-FLOCK",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-TRAC",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-AVNT",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-F",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-SKR",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-ZRO",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-MNT",
+        "commits": 1,
+        "avgDurationMs": 1,
+        "maxDurationMs": 1
+      },
+      {
+        "id": "KRW-XAUT",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-JUP",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-DOT",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-FIL",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-ATH",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-INJ",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-BARD",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-SNT",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-AI",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-MANTRA",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-BABY",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-ZORA",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-WAVES",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-API3",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-O",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-GRT",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-ZIL",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-CFX",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-DEEP",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-VVV",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-HYPER",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-ZK",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-KERNEL",
+        "commits": 1,
+        "avgDurationMs": 0.2,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-APT",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-NEO",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-CHZ",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-MET2",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-CRO",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-SIGN",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-ZKP",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-LAYER",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-ANIME",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-T",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-PROVE",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-CFG",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-NXPC",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-ONT",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-TREE",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-BORA",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-KAT",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-NEWT",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-PYTH",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-SONIC",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-BTT",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-VET",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-AWE",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-JST",
+        "commits": 1,
+        "avgDurationMs": 0.8,
+        "maxDurationMs": 0.8
+      },
+      {
+        "id": "KRW-ARKM",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-CELO",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-DOOD",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-POLYX",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-WAXP",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-GAS",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-TOSHI",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-MANA",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-IOTA",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-GAME2",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-ORCA",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-ZETA",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-RED",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-MINA",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-POWR",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-TOKAMAK",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-AGLD",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-BLUR",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-TAIKO",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-CTC",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-STRAX",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-ZKC",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-SAFE",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-MORPHO",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-W",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-ONG",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-WET",
+        "commits": 1,
+        "avgDurationMs": 0.2,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-ETHFI",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-SENT",
+        "commits": 1,
+        "avgDurationMs": 0.2,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-SOMI",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-BAT",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-A",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-AERO",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-MOODENG",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-KAVA",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-IO",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-HIVE",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-YGG",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-MEW",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-AXL",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-TRUST",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-SC",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-OP",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-EGLD",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-TIA",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-BLAST",
+        "commits": 1,
+        "avgDurationMs": 0.2,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-SKY",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-WCT",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-GMT",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-BREV",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-STEEM",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-LINEA",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-ARK",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-POKT",
+        "commits": 1,
+        "avgDurationMs": 0.2,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-MOCA",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-XCN",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-CPOOL",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-PROS",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-ORDER",
+        "commits": 1,
+        "avgDurationMs": 0.2,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-SUPER",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-BEAM",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-CKB",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-MLK",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-DKA",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-MVL",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-TFUEL",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-HP",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-SPX",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-LPT",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-FLUID",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-MBL",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-META",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-XTZ",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-CBK",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-ANKR",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-ASTR",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-ORBS",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-GLM",
+        "commits": 1,
+        "avgDurationMs": 0.2,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-PUNDIX",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-CVC",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-MTL",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-AHT",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-MED",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-COMP",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-IMX",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-MOC",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-COW",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-CYBER",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-VTHO",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-SUN",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-QKC",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-KNC",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-1INCH",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-MASK",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-RLUSD",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-SYRUP",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-FCT2",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-USD1",
+        "commits": 1,
+        "avgDurationMs": 0.1,
+        "maxDurationMs": 0.1
+      },
+      {
+        "id": "KRW-WIF",
+        "commits": 1,
+        "avgDurationMs": 0.2,
+        "maxDurationMs": 0.2
+      },
+      {
+        "id": "KRW-USDE",
+        "commits": 1,
+        "avgDurationMs": 0.3,
+        "maxDurationMs": 0.3
+      },
+      {
+        "id": "KRW-USDS",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      },
+      {
+        "id": "KRW-USDG",
+        "commits": 1,
+        "avgDurationMs": 0,
+        "maxDurationMs": 0
+      }
+    ]
+  }
+}

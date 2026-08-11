@@ -9,6 +9,7 @@
     "lint": "eslint",
     "test": "vitest run --project unit",
     "test:coverage": "vitest run --project unit --coverage",
+    "analyze": "next experimental-analyze -o",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -46,6 +47,7 @@
     "eslint-config-next": "16.1.6",
     "eslint-plugin-boundaries": "^7.0.2",
     "eslint-plugin-storybook": "^10.2.10",
+    "lighthouse": "^12.8.2",
     "playwright": "^1.58.2",
     "shadcn": "^3.8.5",
     "storybook": "^10.2.10",
