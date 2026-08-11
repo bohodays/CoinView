@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useMemo } from "react";
+import React, { Profiler, useEffect, useMemo } from "react";
 import { useMarketData, mergeMarketAndTicker } from "@/entities/market";
 import {
   CoinRow,
@@ -10,7 +10,27 @@ import {
 } from "@/entities/coin-row";
 import { ErrorState } from "@/shared/ui";
 
+/**
+ * ?debug=profile 쿼리 파라미터가 있을 때만 리렌더 커밋을 window.__perfLog에
+ * 기록한다. 실시간 티커 갱신이 리스트 전체가 아니라 row 단위로만 커밋되는지
+ * 측정하기 위한 임시 계측(scripts/measure-rerenders.mjs에서 읽음). 평소
+ * 사용자 경험/마크업에는 영향 없음.
+ */
+const recordProfilerCommit: React.ProfilerOnRenderCallback = (
+  id,
+  phase,
+  actualDuration,
+) => {
+  const w = window as typeof window & { __perfLog?: unknown[] };
+  w.__perfLog ??= [];
+  w.__perfLog.push({ id, phase, actualDuration, timestamp: Date.now() });
+};
+
 const CoinList = () => {
+  const isProfilingEnabled =
+    typeof window !== "undefined" &&
+    new URLSearchParams(window.location.search).get("debug") === "profile";
+
   const {
     data: marketData,
     isLoading: isMarketDataLoading,
@@ -67,9 +87,23 @@ const CoinList = () => {
         <div className="min-w-0 truncate text-right">{"전일대비"}</div>
       </div>
       <div className="flex-1 min-h-0 overflow-y-auto scrollbar-hide">
-        {coinViewModel?.map((market) => (
-          <CoinRow key={market.market} {...market} />
-        ))}
+        {isProfilingEnabled ? (
+          <Profiler id="coin-list" onRender={recordProfilerCommit}>
+            {coinViewModel?.map((market) => (
+              <Profiler
+                key={market.market}
+                id={market.market}
+                onRender={recordProfilerCommit}
+              >
+                <CoinRow {...market} />
+              </Profiler>
+            ))}
+          </Profiler>
+        ) : (
+          coinViewModel?.map((market) => (
+            <CoinRow key={market.market} {...market} />
+          ))
+        )}
       </div>
     </div>
   );

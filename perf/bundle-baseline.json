@@ -1,0 +1,125 @@
+{
+  "measuredAt": "2026-08-11T15:58:25.939Z",
+  "home": {
+    "total": 979996,
+    "count": 13,
+    "details": [
+      {
+        "file": "157ea630888de6e4.js",
+        "size": 292913
+      },
+      {
+        "file": "d53d9979c17c2432.js",
+        "size": 224634
+      },
+      {
+        "file": "db1f4d63ff1d1c41.js",
+        "size": 119566
+      },
+      {
+        "file": "a6dad97d9634a72d.js",
+        "size": 112594
+      },
+      {
+        "file": "120a09d54d6dd59b.js",
+        "size": 86528
+      },
+      {
+        "file": "82abf2d65f5428ae.js",
+        "size": 33299
+      },
+      {
+        "file": "d2be314c3ece3fbe.js",
+        "size": 30681
+      },
+      {
+        "file": "20313a01d525d17b.js",
+        "size": 30497
+      },
+      {
+        "file": "e168b69717eace01.js",
+        "size": 22442
+      },
+      {
+        "file": "20699eeb48d3a20a.js",
+        "size": 17068
+      },
+      {
+        "file": "7c92e96509cd355e.js",
+        "size": 9101
+      },
+      {
+        "file": "6d9010f6ebd7024f.js",
+        "size": 391
+      },
+      {
+        "file": "ff1a16fafef87110.js",
+        "size": 282
+      }
+    ]
+  },
+  "detail": {
+    "total": 1133891,
+    "count": 13,
+    "details": [
+      {
+        "file": "c20921206f2a2865.js",
+        "size": 292913
+      },
+      {
+        "file": "d53d9979c17c2432.js",
+        "size": 224634
+      },
+      {
+        "file": "87597965cce37546.js",
+        "size": 170963
+      },
+      {
+        "file": "db1f4d63ff1d1c41.js",
+        "size": 119566
+      },
+      {
+        "file": "a6dad97d9634a72d.js",
+        "size": 112594
+      },
+      {
+        "file": "120a09d54d6dd59b.js",
+        "size": 86528
+      },
+      {
+        "file": "82abf2d65f5428ae.js",
+        "size": 33299
+      },
+      {
+        "file": "d2be314c3ece3fbe.js",
+        "size": 30681
+      },
+      {
+        "file": "20313a01d525d17b.js",
+        "size": 30497
+      },
+      {
+        "file": "e168b69717eace01.js",
+        "size": 22442
+      },
+      {
+        "file": "7c92e96509cd355e.js",
+        "size": 9101
+      },
+      {
+        "file": "6d9010f6ebd7024f.js",
+        "size": 391
+      },
+      {
+        "file": "ff1a16fafef87110.js",
+        "size": 282
+      }
+    ]
+  },
+  "lightweightChartsChunk": {
+    "file": "87597965cce37546.js",
+    "sizeBytes": 170963,
+    "includedInHome": false,
+    "includedInDetail": true
+  }
+}
