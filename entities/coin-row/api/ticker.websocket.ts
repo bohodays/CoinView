@@ -5,10 +5,15 @@ import { useTickerStore } from "../model/ticker.store";
 import { tickerWsMessageSchema } from "../model/type";
 
 const MAX_RECONNECT_DELAY_MS = 30_000;
+// 페이지 전환 시 다른 WS(캔들)가 닫히는 시점과 겹쳐 Upbit가 "너무 많은
+// 연결 시도"로 판단해 핸드셰이크를 429로 거부하는 경우가 있어, 새 연결
+// 시도 전에 짧게 여유를 둔다.
+const CONNECT_DELAY_MS = 300;
 
 let socket: WebSocket | null = null;
 let subscribedCodes: string[] = [];
 let reconnectTimer: ReturnType<typeof setTimeout> | null = null;
+let connectTimer: ReturnType<typeof setTimeout> | null = null;
 let reconnectAttempt = 0;
 let isManuallyDisconnected = false;
 const WS_URL = requireEnv(
@@ -30,8 +35,9 @@ export const connectTickerSocketByCodes = (codes: string[]) => {
     }
     return; // 중복 연결 방지
   }
+  if (connectTimer) return; // 이미 연결이 예약되어 있음
 
-  openSocket();
+  scheduleOpenSocket();
 };
 
 /**
@@ -48,9 +54,16 @@ export const unsubscribeTickerCodes = (codes: string[]) => {
   }
 };
 
-function openSocket() {
+function scheduleOpenSocket() {
   clearReconnectTimer();
+  clearConnectTimer();
+  connectTimer = setTimeout(() => {
+    connectTimer = null;
+    openSocket();
+  }, CONNECT_DELAY_MS);
+}
 
+function openSocket() {
   socket = new WebSocket(WS_URL);
 
   socket.onopen = () => {
@@ -73,7 +86,8 @@ function openSocket() {
   };
 
   socket.onerror = (err) => {
-    console.error("WS error", err);
+    // 재연결 로직이 자동으로 복구를 시도하므로 error 대신 warn으로 기록
+    console.warn("WS error, 재연결을 시도합니다", err);
     socket?.close();
   };
 }
@@ -83,13 +97,20 @@ function scheduleReconnect() {
 
   const delay = Math.min(1000 * 2 ** reconnectAttempt, MAX_RECONNECT_DELAY_MS);
   reconnectAttempt += 1;
-  reconnectTimer = setTimeout(openSocket, delay);
+  reconnectTimer = setTimeout(scheduleOpenSocket, delay);
 }
 
 function clearReconnectTimer() {
   if (reconnectTimer) {
     clearTimeout(reconnectTimer);
     reconnectTimer = null;
+  }
+}
+
+function clearConnectTimer() {
+  if (connectTimer) {
+    clearTimeout(connectTimer);
+    connectTimer = null;
   }
 }
 
@@ -104,6 +125,7 @@ const createSubscribePayload = (codes: string[]) => [
 export const disconnectTickerSocket = () => {
   isManuallyDisconnected = true;
   clearReconnectTimer();
+  clearConnectTimer();
   reconnectAttempt = 0;
   socket?.close();
   socket = null;

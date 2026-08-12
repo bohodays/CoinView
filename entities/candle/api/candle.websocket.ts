@@ -12,6 +12,10 @@ import { requireEnv } from "@/shared/lib";
 type SocketStatus = "idle" | "connecting" | "open" | "closed" | "error";
 
 const MAX_RECONNECT_DELAY_MS = 30_000;
+// 페이지 전환 시 다른 WS(티커)가 닫히는 시점과 겹쳐 Upbit가 "너무 많은
+// 연결 시도"로 판단해 핸드셰이크를 429로 거부하는 경우가 있어, 새 연결
+// 시도 전에 짧게 여유를 둔다.
+const CONNECT_DELAY_MS = 300;
 
 type Params = {
   market: string;
@@ -53,6 +57,7 @@ export const useUpbitCandleSocket = ({
   const reconnectTimerRef = useRef<ReturnType<typeof setTimeout> | null>(
     null,
   );
+  const connectTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const reconnectAttemptRef = useRef(0);
 
   // stale closure 방지
@@ -81,8 +86,16 @@ export const useUpbitCandleSocket = ({
     }
   };
 
+  const clearConnectTimer = () => {
+    if (connectTimerRef.current) {
+      clearTimeout(connectTimerRef.current);
+      connectTimerRef.current = null;
+    }
+  };
+
   const closeSocket = () => {
     clearReconnectTimer();
+    clearConnectTimer();
 
     const ws = wsRef.current;
     wsRef.current = null;
@@ -100,18 +113,7 @@ export const useUpbitCandleSocket = ({
     }
   };
 
-  const connectIfNeeded = () => {
-    if (!enabled || !market) return;
-
-    const existing = wsRef.current;
-    if (
-      existing &&
-      (existing.readyState === WebSocket.OPEN ||
-        existing.readyState === WebSocket.CONNECTING)
-    ) {
-      return;
-    }
-
+  const doConnect = () => {
     setStatus("connecting");
 
     const ws = new WebSocket(WS_URL);
@@ -146,7 +148,8 @@ export const useUpbitCandleSocket = ({
     };
 
     ws.onerror = (err) => {
-      console.error("WS error", err);
+      // 재연결 로직이 자동으로 복구를 시도하므로 error 대신 warn으로 기록
+      console.warn("WS error, 재연결을 시도합니다", err);
       setStatus("error");
       ws?.close();
     };
@@ -156,6 +159,25 @@ export const useUpbitCandleSocket = ({
       setStatus("closed");
       scheduleReconnect();
     };
+  };
+
+  const connectIfNeeded = () => {
+    if (!enabled || !market) return;
+
+    const existing = wsRef.current;
+    if (
+      existing &&
+      (existing.readyState === WebSocket.OPEN ||
+        existing.readyState === WebSocket.CONNECTING)
+    ) {
+      return;
+    }
+    if (connectTimerRef.current) return; // 이미 연결이 예약되어 있음
+
+    connectTimerRef.current = setTimeout(() => {
+      connectTimerRef.current = null;
+      doConnect();
+    }, CONNECT_DELAY_MS);
   };
 
   const scheduleReconnect = () => {
