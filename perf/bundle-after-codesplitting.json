@@ -1,0 +1,17 @@
+{
+  "measuredAt": "2026-08-12T14:39:00.791Z",
+  "home": {
+    "total": 979934,
+    "count": 14
+  },
+  "detail": {
+    "total": 985501,
+    "count": 14
+  },
+  "lightweightChartsChunk": {
+    "file": "141030d33984021e.js",
+    "sizeBytes": 160975,
+    "includedInDetailInitialHtml": false,
+    "includedInHomeInitialHtml": false
+  }
+}

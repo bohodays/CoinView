@@ -47,6 +47,20 @@ Turbopack 빌드에서는 `@next/bundle-analyzer`(webpack 전용)가 동작하�
 
 원본 raw 데이터: `perf/rerender-baseline.json`.
 
+## 진행 상황 — 코드 스플리팅 적용 (2026-08-12)
+
+`widgets/coin-detail/ui/CoinDetail.tsx`에서 `CoinChart`를 `next/dynamic(..., { ssr: false })`로 지연 로딩하도록 변경(`perf/bundle-after-codesplitting.json`).
+
+| | 코드 스플리팅 전 | 후 |
+| --- | --- | --- |
+| 상세 페이지 초기 JS | 1,107.3 KB | **962.4 KB** (−144.9 KB, 약 −13%) |
+| `lightweight-charts` 청크가 상세 페이지 **초기 HTML**에 포함됨 | 예 | **아니오** (마운트 시점에 별도로 fetch) |
+| 홈 페이지 초기 JS | 957.0 KB | 957.0 KB (변화 없음, 원래도 미포함) |
+
+로딩 폴백은 기존 `CoinDetailSkeleton`의 차트 자리 마크업을 `ChartSkeleton`으로 추출해 재사용(레이아웃 시프트 방지). Playwright로 상세 페이지(`/code/KRW-BTC`)를 열어 캔버스 7개가 여전히 정상 렌더되고 콘솔 에러가 없음을 확인.
+
+Lighthouse LCP/TBT와 리렌더 커밋 수는 아직 재측정 전(다음 최적화들 — 가상 스크롤, WS 스로틀링 — 까지 마친 뒤 한 번에 재측정 예정).
+
 ## 재측정 방법 (Phase 5 최적화 완료 후 동일하게 재실행)
 
 ```bash
